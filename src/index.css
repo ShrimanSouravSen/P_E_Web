@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #111012;
+  --color-surface: #18161b;
+  --color-elevated: #232027;
+  --color-text: #f7f3ee;
+  --color-muted: #c8bfb4;
+  --color-line: #3a2f27;
+  --color-accent: #db8a3a;
+  --color-accent-soft: rgba(219, 138, 58, 0.18);
+
+  --shadow-copper: 0 0 25px rgba(219, 138, 58, 0.23);
+  --shadow-panel: 0 20px 44px rgba(0, 0, 0, 0.44);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body, 'Manrope', sans-serif);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.grain {
+  position: relative;
+}
+
+.grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: radial-gradient(circle at 1px 1px, #fff 1px, transparent 0);
+  background-size: 3px 3px;
+}
+
+.panel {
+  @apply rounded-tokenLg border border-line backdrop-blur-sm;
+  background: color-mix(in srgb, var(--color-surface) 78%, transparent);
+  box-shadow: var(--shadow-panel);
+}
