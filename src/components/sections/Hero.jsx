@@ -1,29 +1,27 @@
-import Button from '../ui/Button'
+import HeroBg from '../../assets/HeroBg.png'
 
 export default function Hero({ onOpenQuote }) {
   return (
-    <section id="home" className="grain border-b border-line px-6 pb-14 pt-12 md:px-10 md:pt-16">
-      <div className="relative overflow-hidden rounded-tokenLg border border-line/70">
+    <section id="home" className="grain border-b border-line">
+      <div className="relative overflow-hidden shadow-panel">
         <img
-          src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=1600&q=80"
-          alt="Molten copper pouring"
-          className="h-[470px] w-full object-cover"
+          src={HeroBg}
+          alt="Molten copper pouring into ingot molds"
+          className="h-[360px] w-full object-cover object-center md:h-[460px] lg:h-[520px]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-black/55" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.94)_0%,rgba(0,0,0,0.82)_28%,rgba(0,0,0,0.45)_54%,rgba(0,0,0,0.12)_78%,rgba(0,0,0,0.05)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_48%,rgba(219,138,58,0.08),transparent_32%)]" />
 
-        <div className="absolute left-0 top-0 w-full px-7 py-8 md:max-w-2xl md:px-10 md:py-12">
-          <p className="mb-4 text-sm uppercase tracking-[0.2em] text-muted">Scrap to Industrial Ingots</p>
-          <h1 className="font-heading text-4xl font-semibold leading-[1.02] text-white md:text-6xl">
-            REFINING THE FLOW OF FUTURE COPPER
-          </h1>
-          <p className="mt-5 max-w-xl text-base text-[#e7d8c8] md:text-xl">
-            From scrap to industrial ingots, powered by transparency and integrity.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button>Explore Process</Button>
-            <Button variant="ghost" onClick={onOpenQuote}>
-              Quick Quote
-            </Button>
+        <div className="absolute inset-y-0 left-0 z-10 flex w-full items-center px-6 md:px-10 lg:px-12">
+          <div className="max-w-[36rem]">
+
+            <h1 className="max-w-[11ch] font-heading text-[2.45rem] font-semibold uppercase leading-[0.92] tracking-[-0.05em] text-white sm:text-[3.3rem] md:text-[4.3rem] lg:text-[5rem]">
+              Refining the Flow of Future Copper
+            </h1>
+
+            <p className="mt-4 max-w-[28rem] text-[1rem] leading-[1.45] text-[#b7aea2] md:mt-5 md:text-[1.1rem]">
+              From recovered scrap to high-purity copper ingots, built on traceability, process control, and industrial integrity.
+            </p>
           </div>
         </div>
       </div>

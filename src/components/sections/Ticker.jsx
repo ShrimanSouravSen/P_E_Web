@@ -6,16 +6,22 @@ const tickerItems = [
 ]
 
 export default function Ticker() {
-  const row = [...tickerItems, ...tickerItems]
+  const row = tickerItems
 
   return (
-    <section className="overflow-hidden border-y border-line bg-elevated/30 py-3">
-      <div className="animate-marquee whitespace-nowrap">
-        {row.map((item, index) => (
-          <span key={`${item}-${index}`} className="mx-5 font-mono text-sm text-muted">
-            | {item}
-          </span>
-        ))}
+    <section className="relative border-y border-line bg-elevated/30 py-3">
+      <div className="relative w-full overflow-hidden">
+        <div className="inline-flex min-w-max animate-marquee whitespace-nowrap will-change-transform">
+          {[0, 1].map((loop) => (
+            <div key={loop} className="flex shrink-0 items-center pr-10" aria-hidden={loop === 1}>
+            {row.map((item, index) => (
+              <span key={`${loop}-${item}-${index}`} className="mx-5 font-mono text-sm text-muted">
+                | {item}
+              </span>
+            ))}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

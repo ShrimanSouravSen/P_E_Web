@@ -26,6 +26,12 @@ body,
   min-height: 100%;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   font-family: var(--font-body, 'Manrope', sans-serif);

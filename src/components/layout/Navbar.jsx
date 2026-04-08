@@ -5,7 +5,7 @@ const navItems = ['Home', 'Process', 'Sustainability', 'Applications', 'About']
 export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
+      <div className="mx-auto flex items-center justify-between px-6 py-4 md:px-10">
         <div>
           <p className="font-heading text-lg leading-none text-accent">Parbati</p>
           <p className="font-heading text-sm leading-none text-text">Enterprises</p>
