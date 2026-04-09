@@ -12,17 +12,44 @@ export default function Mission() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          <img
-            className="h-56 w-full rounded-tokenMd border border-line object-cover"
-            src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=900&q=80"
-            alt="Factory interior"
-          />
-          <img
-            className="mt-10 h-56 w-full rounded-tokenMd border border-line object-cover"
-            src="https://images.unsplash.com/photo-1565610222536-ef125c59da2d?auto=format&fit=crop&w=900&q=80"
-            alt="Industrial plant"
-          />
+        <div className="grid h-[420px] w-full grid-cols-3 grid-rows-2 gap-2">
+
+          {/* 1 — tall left, spans both rows */}
+          <div className="col-span-1 row-span-2 overflow-hidden rounded-tokenMd border border-line/60 shadow-panel">
+            <img
+              className="h-full w-full object-cover"
+              src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=900&q=80"
+              alt="Heavy refinery plant"
+            />
+          </div>
+
+          {/* 3 — top middle */}
+          <div className="col-span-1 row-span-1 overflow-hidden rounded-tokenMd border border-line/60 shadow-panel">
+            <img
+              className="h-full w-full object-cover object-center"
+              src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=900&q=80"
+              alt="Industrial casting and molds"
+            />
+          </div>
+
+          {/* 2 — top right */}
+          <div className="col-span-1 row-span-1 overflow-hidden rounded-tokenMd border border-line/60 shadow-panel">
+            <img
+              className="h-full w-full object-cover"
+              src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=900&q=80"
+              alt="Factory floor machinery"
+            />
+          </div>
+
+          {/* 4 — wide bottom, spans two columns */}
+          <div className="col-span-2 row-span-1 overflow-hidden rounded-tokenMd border border-line/60 shadow-panel">
+            <img
+              className="h-full w-full object-cover object-center"
+              src="https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?auto=format&fit=crop&w=900&q=80"
+              alt="Copper refinery exterior"
+            />
+          </div>
+
         </div>
       </div>
     </section>
