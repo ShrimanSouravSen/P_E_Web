@@ -15,8 +15,8 @@ function App() {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-bg text-text transition-colors duration-300">
-      <div className="mx-auto box-border border-x border-line bg-[radial-gradient(circle_at_15%_25%,var(--color-accent-soft),transparent_35%),radial-gradient(circle_at_80%_75%,rgba(72,96,134,0.22),transparent_40%),var(--color-bg)]">
+    <div className="min-h-screen w-full bg-bg text-text transition-colors duration-300">
+      <div className="w-full">
         <AnnouncementBar />
         <Navbar />
         <Hero onOpenQuote={() => setIsQuoteOpen(true)} />
