@@ -2,8 +2,8 @@ import OrbitalDiagram from './OrbitalDiagram'
 
 export default function IndustryApplications() {
   return (
-    <section id="applications" className="border-b border-line px-6 py-14 md:px-10 md:py-16">
-      <div className="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-center">
+    <section id="applications" className="border-b border-line px-6 py-10 md:px-10 md:py-10">
+      <div className="grid gap-8 lg:gap-0 lg:grid-cols-2 lg:items-center">
         <div>
           <p className="text-sm uppercase tracking-[0.18em] text-accent">Industry Applications</p>
           <h3 className="mt-1 text-3xl md:text-4xl">High-Conductivity Copper for Critical Systems</h3>
@@ -11,7 +11,9 @@ export default function IndustryApplications() {
             Precision-grade cathodes and ingots for energy, mobility, and infrastructure sectors.
           </p>
         </div>
-        <OrbitalDiagram />
+        <div className="lg:flex lg:justify-center">
+          <OrbitalDiagram />
+        </div>
       </div>
     </section>
   )

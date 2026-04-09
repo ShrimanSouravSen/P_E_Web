@@ -1,26 +1,84 @@
-const points = [
-  { x: 0, y: -84, label: 'Electrical & Power' },
-  { x: 87, y: -10, label: 'EV Components' },
-  { x: 0, y: 86, label: 'Infrastructure' },
-  { x: -88, y: -14, label: 'Renewable Energy' },
-]
-
 export default function OrbitalDiagram() {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[320px] overflow-hidden">
-      <div className="absolute inset-0 animate-orbit rounded-full border border-accent/50" />
-      <div className="absolute inset-8 animate-orbit rounded-full border border-accent/35 [animation-duration:18s]" />
-      <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,var(--color-accent),#7f4a18)] shadow-copper" />
-      <svg viewBox="-160 -160 320 320" className="absolute inset-0 h-full w-full">
-        {points.map((point) => (
-          <g key={point.label}>
-            <circle cx={point.x} cy={point.y} r="7" fill="var(--color-accent)" />
-            <text x={point.x} y={point.y + 22} textAnchor="middle" fill="var(--color-muted)" fontSize="10">
-              {point.label}
-            </text>
-          </g>
-        ))}
-      </svg>
+    <div className="orbit-3d-stage relative mx-auto aspect-square w-full max-w-[320px] -translate-x-4 overflow-hidden md:-translate-x-5 lg:translate-x-0">
+      <div className="orbit-3d-scene absolute inset-2">
+        <div className="ring-axis ring-x">
+          <div className="ring-orbit">
+            <div className="ring-trace" />
+            <div className="ring-marker-orbit">
+              <div className="ring-marker">
+                <div className="ring-marker-highlight" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="ring-axis ring-y">
+          <div className="ring-orbit">
+            <div className="ring-trace" />
+            <div className="ring-marker-orbit">
+              <div className="ring-marker">
+                <div className="ring-marker-highlight" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="ring-axis ring-mid">
+          <div className="ring-orbit">
+            <div className="ring-trace" />
+            <div className="ring-marker-orbit">
+              <div className="ring-marker">
+                <div className="ring-marker-highlight" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="reference-ring" />
+        <div className="reference-nodes">
+          <div className="reference-node-set reference-node-set-x">
+            <div className="reference-node reference-node-axis-start">
+              <div className="reference-node-highlight" />
+              <span className="reference-node-label label-side-right">Power</span>
+            </div>
+            <div className="reference-node reference-node-axis-end">
+              <div className="reference-node-highlight" />
+              <span className="reference-node-label label-side-left">Infra</span>
+            </div>
+          </div>
+          <div className="reference-node-set reference-node-set-y">
+            <div className="reference-node reference-node-axis-start">
+              <div className="reference-node-highlight" />
+              <span className="reference-node-label label-side-left">EV Components</span>
+            </div>
+            <div className="reference-node reference-node-axis-end">
+              <div className="reference-node-highlight" />
+              <span className="reference-node-label label-side-right">Green</span>
+            </div>
+          </div>
+          <div className="reference-node-set reference-node-set-mid">
+            <div className="reference-node reference-node-horizontal-start">
+              <div className="reference-node-highlight" />
+              <span className="reference-node-label label-side-left">Cable</span>
+            </div>
+            <div className="reference-node reference-node-horizontal-end">
+              <div className="reference-node-highlight" />
+              <span className="reference-node-label label-side-right">Alloy</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute inset-0 z-10 flex items-center justify-center">
+          <div className="sphere-3d">
+            <div className="sphere-highlight" />
+            <div className="sphere-highlight-soft" />
+          </div>
+        </div>
+
+      </div>
+
+
     </div>
   )
 }
