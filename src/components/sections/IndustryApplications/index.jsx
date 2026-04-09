@@ -6,7 +6,7 @@ export default function IndustryApplications() {
       <div className="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-center">
         <div>
           <p className="text-sm uppercase tracking-[0.18em] text-accent">Industry Applications</p>
-          <h3 className="mt-1 font-heading text-3xl md:text-4xl">High-Conductivity Copper for Critical Systems</h3>
+          <h3 className="mt-1 text-3xl md:text-4xl">High-Conductivity Copper for Critical Systems</h3>
           <p className="mt-3 max-w-2xl text-muted">
             Precision-grade cathodes and ingots for energy, mobility, and infrastructure sectors.
           </p>

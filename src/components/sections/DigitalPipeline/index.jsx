@@ -16,7 +16,7 @@ export default function DigitalPipeline() {
   return (
     <section id="process" className="border-b border-line px-6 py-14 md:px-10 md:py-16">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
-        <h2 className="font-heading text-4xl md:text-5xl">Digital Pipeline</h2>
+        <h2 className="text-4xl md:text-5xl">Digital Pipeline</h2>
         <p className="max-w-md text-sm text-muted md:text-base">Traceable from collection to casting with telemetry-ready checkpoints.</p>
       </div>
 

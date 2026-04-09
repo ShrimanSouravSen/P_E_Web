@@ -15,7 +15,7 @@ export default function QuoteModal({ isOpen, onClose }) {
     <div className="fixed inset-0 z-50 grid place-items-center bg-black/50 px-4">
       <div className="panel w-full max-w-xl p-6">
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="font-heading text-2xl text-text">Quick Quote</h3>
+          <h3 className="text-2xl text-text">Quick Quote</h3>
           <button type="button" onClick={onClose} className="text-muted hover:text-text" aria-label="Close">
             x
           </button>

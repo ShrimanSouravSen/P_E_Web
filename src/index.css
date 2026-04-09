@@ -34,9 +34,12 @@ body {
 
 body {
   margin: 0;
-  font-family: var(--font-body, 'Manrope', sans-serif);
   background: var(--color-bg);
   color: var(--color-text);
+}
+
+html {
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .grain {

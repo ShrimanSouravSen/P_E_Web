@@ -7,7 +7,7 @@ export default function PipelineStep({ title, subtitle, active }) {
           : 'border-line bg-surface/80 hover:border-accent/70'
       }`}
     >
-      <h4 className="font-heading text-lg text-text">{title}</h4>
+      <h4 className="text-lg text-text">{title}</h4>
       <p className="mt-1 text-sm text-muted">{subtitle}</p>
     </article>
   )

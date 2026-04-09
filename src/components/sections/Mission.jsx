@@ -4,7 +4,7 @@ export default function Mission() {
       <div className="grid items-center gap-8 lg:grid-cols-2">
         <div>
           <p className="mb-2 text-sm uppercase tracking-[0.15em] text-accent">Purity Forged from History</p>
-          <h2 className="font-heading text-4xl leading-tight md:text-5xl">
+          <h2 className="text-4xl leading-tight md:text-5xl">
             We don't mine the earth. We refine it.
           </h2>
           <p className="mt-4 max-w-lg text-muted">

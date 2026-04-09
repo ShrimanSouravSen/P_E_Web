@@ -13,9 +13,9 @@ export default function Hero({ onOpenQuote }) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_48%,rgba(219,138,58,0.08),transparent_32%)]" />
 
         <div className="absolute inset-y-0 left-0 z-10 flex w-full items-center px-6 md:px-10 lg:px-12">
-          <div className="max-w-[36rem]">
+          <div className="max-w-[50rem]">
 
-            <h1 className="max-w-[11ch] font-heading text-[2.45rem] font-semibold uppercase leading-[0.92] tracking-[-0.05em] text-white sm:text-[3.3rem] md:text-[4.3rem] lg:text-[5rem]">
+            <h1 className="max-w-[40ch] text-[2.45rem] uppercase leading-[0.92] text-white sm:text-[3.3rem] md:text-[4.3rem] lg:text-[5rem]">
               Refining the Flow of Future Copper
             </h1>
 

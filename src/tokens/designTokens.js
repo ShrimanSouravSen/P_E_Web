@@ -1,7 +1,7 @@
 export const designTokens = {
   typography: {
-    heading: 'Sora',
-    body: 'Manrope',
+    heading: 'Roboto Condensed',
+    body: 'Roboto Condensed',
     mono: 'JetBrains Mono',
   },
   spacing: {
