@@ -72,7 +72,7 @@ const bottomFlow = [
 function NodeIcon({ type }) {
   if (type === 'scrap') {
     return (
-      <svg viewBox="0 0 24 24" className="h-9 w-9 text-[rgba(221,152,94,0.95)]" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg viewBox="0 0 24 24" className="h-9 w-9 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="9" cy="9" r="2.8" />
         <circle cx="15" cy="9" r="2.8" />
         <circle cx="12" cy="14.3" r="2.8" />
@@ -82,7 +82,7 @@ function NodeIcon({ type }) {
 
   if (type === 'batch') {
     return (
-      <svg viewBox="0 0 24 24" className="h-9 w-9 text-[rgba(221,152,94,0.95)]" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg viewBox="0 0 24 24" className="h-9 w-9 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M4 18V8l8 3 8-3v10" />
         <path d="M12 3v8" />
         <path d="M8 5v4" />
@@ -93,7 +93,7 @@ function NodeIcon({ type }) {
 
   if (type === 'truck') {
     return (
-      <svg viewBox="0 0 24 24" className="h-9 w-9 text-[rgba(221,152,94,0.95)]" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg viewBox="0 0 24 24" className="h-9 w-9 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
         <rect x="2.8" y="6.5" width="12.5" height="8" rx="1" />
         <path d="M15.3 9h3.6l2.2 2.1v3.4h-5.8" />
         <circle cx="7" cy="16.8" r="1.3" />
@@ -104,7 +104,7 @@ function NodeIcon({ type }) {
 
   if (type === 'bars') {
     return (
-      <svg viewBox="0 0 24 24" className="h-9 w-9 text-[rgba(221,152,94,0.95)]" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg viewBox="0 0 24 24" className="h-9 w-9 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M4 18h16" />
         <rect x="6" y="10" width="2.6" height="6" />
         <rect x="10.7" y="7" width="2.6" height="9" />
@@ -115,7 +115,7 @@ function NodeIcon({ type }) {
 
   if (type === 'coil') {
     return (
-      <svg viewBox="0 0 24 24" className="h-9 w-9 text-[rgba(221,152,94,0.95)]" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg viewBox="0 0 24 24" className="h-9 w-9 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M4 12c0-2.8 2.5-4 5-4 2.6 0 5 1.2 5 4s-2.4 4-5 4" />
         <path d="M9 8c2.6 0 5 1.2 5 4s-2.4 4-5 4" />
         <path d="M14 8c2.6 0 5 1.2 5 4s-2.4 4-5 4" />
@@ -124,7 +124,7 @@ function NodeIcon({ type }) {
   }
 
   return (
-    <svg viewBox="0 0 24 24" className="h-9 w-9 text-[rgba(221,152,94,0.95)]" fill="none" stroke="currentColor" strokeWidth="1.7">
+    <svg viewBox="0 0 24 24" className="h-9 w-9 text-accent" fill="none" stroke="currentColor" strokeWidth="1.7">
       <circle cx="12" cy="12" r="6.5" />
       <path d="m8.6 12.3 2.2 2.2 4.8-5.2" />
     </svg>
@@ -138,8 +138,8 @@ function FlowNode({ item }) {
         <NodeIcon type={item.icon} />
       </div>
 
-      <p className="mt-3 text-[1.95rem] leading-none text-[rgba(245,236,224,0.94)]">{item.title}</p>
-      {item.subtitle ? <p className="mt-1 text-[0.9rem] text-[rgba(217,205,191,0.72)]">{item.subtitle}</p> : null}
+      <p className="mt-3 text-[1.95rem] leading-none text-text">{item.title}</p>
+      {item.subtitle ? <p className="mt-1 text-[0.9rem] text-muted">{item.subtitle}</p> : null}
 
       {item.chip ? (
         <p
@@ -154,7 +154,7 @@ function FlowNode({ item }) {
       {item.tags?.map((tag) => (
         <p
           key={tag}
-          className="mt-2 rounded-md border border-[rgba(81,78,76,0.8)] bg-[rgba(53,52,54,0.76)] px-3 py-1 text-[0.72rem] leading-none text-[rgba(216,208,196,0.72)]"
+          className="mt-2 rounded-md border border-[rgba(81,78,76,0.8)] bg-[rgba(53,52,54,0.76)] px-3 py-1 text-[0.72rem] leading-none text-muted"
         >
           {tag}
         </p>
@@ -176,7 +176,7 @@ export default function DigitalPipeline() {
                 <Fragment key={item.title + index}>
                   <FlowNode item={item} />
                   {index < topFlow.length - 1 ? (
-                    <div className="pt-11 text-center text-[2.05rem] text-[rgba(204,137,83,0.82)]">→</div>
+                    <div className="pt-11 text-center text-[2.05rem] text-accent">→</div>
                   ) : null}
                 </Fragment>
               ))}
@@ -187,15 +187,15 @@ export default function DigitalPipeline() {
                 <Fragment key={item.title + '-b-' + index}>
                   <FlowNode item={item} />
                   {index < bottomFlow.length - 1 ? (
-                    <div className="pt-11 text-center text-[2.05rem] text-[rgba(204,137,83,0.82)]">←</div>
+                    <div className="pt-11 text-center text-[2.05rem] text-accent">←</div>
                   ) : null}
                 </Fragment>
               ))}
             </div>
 
             <div className="pointer-events-none absolute -right-1 top-[44px] flex h-[259px] w-[88px] flex-col items-center justify-between rounded-r-[42px] border-r border-t border-b border-[rgba(204,137,83,0.62)] py-3">
-              <span className="text-[2rem] text-[rgba(204,137,83,0.82)]">↓</span>
-              <span className="text-[2rem] text-[rgba(204,137,83,0.82)]">←</span>
+              <span className="text-[2rem] text-accent">↓</span>
+              <span className="text-[2rem] text-accent">←</span>
             </div>
           </div>
         </div>
