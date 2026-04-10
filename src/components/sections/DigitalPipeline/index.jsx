@@ -1,4 +1,6 @@
-import { Fragment } from 'react'
+import { useState } from 'react'
+
+import PipelineFlow from './PipelineFlow'
 
 const topFlow = [
   {
@@ -69,135 +71,99 @@ const bottomFlow = [
   },
 ]
 
-function NodeIcon({ type }) {
-  if (type === 'scrap') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-9 w-9 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <circle cx="9" cy="9" r="2.8" />
-        <circle cx="15" cy="9" r="2.8" />
-        <circle cx="12" cy="14.3" r="2.8" />
-      </svg>
-    )
-  }
+const topFlowAlt = [
+  {
+    title: 'Collection',
+    icon: 'scrap',
+  },
+  {
+    title: 'Sorting',
+    icon: 'check',
+    chip: 'SOURCE VERIFIED',
+    chipTone: 'amber',
+    tags: ['Yard 14 Intake'],
+  },
+  {
+    title: 'Shredding',
+    icon: 'batch',
+    chip: 'BATCH PREPARED',
+    chipTone: 'green',
+    tags: ['Line A Mechanical'],
+  },
+  {
+    title: 'Smelting',
+    icon: 'check',
+    chip: 'TEMP STABLE',
+    chipTone: 'green',
+    tags: ['Furnace 03'],
+  },
+  {
+    title: 'Anode Casting',
+    icon: 'truck',
+    chip: 'READY',
+    chipTone: 'amber',
+    tags: ['Dispatch Queue'],
+  },
+]
 
-  if (type === 'batch') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-9 w-9 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M4 18V8l8 3 8-3v10" />
-        <path d="M12 3v8" />
-        <path d="M8 5v4" />
-        <path d="M16 5v4" />
-      </svg>
-    )
-  }
-
-  if (type === 'truck') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-9 w-9 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="2.8" y="6.5" width="12.5" height="8" rx="1" />
-        <path d="M15.3 9h3.6l2.2 2.1v3.4h-5.8" />
-        <circle cx="7" cy="16.8" r="1.3" />
-        <circle cx="17.5" cy="16.8" r="1.3" />
-      </svg>
-    )
-  }
-
-  if (type === 'bars') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-9 w-9 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M4 18h16" />
-        <rect x="6" y="10" width="2.6" height="6" />
-        <rect x="10.7" y="7" width="2.6" height="9" />
-        <rect x="15.4" y="12" width="2.6" height="4" />
-      </svg>
-    )
-  }
-
-  if (type === 'coil') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-9 w-9 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M4 12c0-2.8 2.5-4 5-4 2.6 0 5 1.2 5 4s-2.4 4-5 4" />
-        <path d="M9 8c2.6 0 5 1.2 5 4s-2.4 4-5 4" />
-        <path d="M14 8c2.6 0 5 1.2 5 4s-2.4 4-5 4" />
-      </svg>
-    )
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" className="h-9 w-9 text-accent" fill="none" stroke="currentColor" strokeWidth="1.7">
-      <circle cx="12" cy="12" r="6.5" />
-      <path d="m8.6 12.3 2.2 2.2 4.8-5.2" />
-    </svg>
-  )
-}
-
-function FlowNode({ item }) {
-  return (
-    <div className="flex flex-col items-center text-center">
-      <div className="flex h-[88px] w-[88px] items-center justify-center rounded-full border border-[rgba(211,145,92,0.44)] bg-[radial-gradient(circle_at_35%_30%,rgba(49,43,38,0.96),rgba(29,28,30,0.98))]">
-        <NodeIcon type={item.icon} />
-      </div>
-
-      <p className="mt-3 text-[1.95rem] leading-none text-text">{item.title}</p>
-      {item.subtitle ? <p className="mt-1 text-[0.9rem] text-muted">{item.subtitle}</p> : null}
-
-      {item.chip ? (
-        <p
-          className={`mt-3 rounded-md px-3 py-1 text-[0.72rem] leading-none text-[#141414] ${
-            item.chipTone === 'amber' ? 'bg-[rgba(237,174,92,0.95)]' : 'bg-[rgba(154,189,151,0.9)]'
-          }`}
-        >
-          {item.chip}
-        </p>
-      ) : null}
-
-      {item.tags?.map((tag) => (
-        <p
-          key={tag}
-          className="mt-2 rounded-md border border-[rgba(81,78,76,0.8)] bg-[rgba(53,52,54,0.76)] px-3 py-1 text-[0.72rem] leading-none text-muted"
-        >
-          {tag}
-        </p>
-      ))}
-    </div>
-  )
-}
+const bottomFlowAlt = [
+  {
+    title: 'Lab Assay',
+    subtitle: 'TRACEABILITY',
+    icon: 'scrap',
+  },
+  {
+    title: 'Electrolytic',
+    icon: 'bars',
+    chip: 'PURITY 99.90%',
+    chipTone: 'green',
+    tags: ['Cell Group B'],
+  },
+  {
+    title: 'Rod Casting',
+    icon: 'batch',
+    chip: 'RUNNING',
+    chipTone: 'green',
+    tags: ['Continuous Cast'],
+  },
+  {
+    title: 'Final QC',
+    icon: 'check-muted',
+    chip: 'PASS',
+    chipTone: 'green',
+    tags: ['Lot Locked'],
+  },
+  {
+    title: 'Shipment',
+    icon: 'coil',
+    tags: ['ERP Closed'],
+  },
+]
 
 export default function DigitalPipeline() {
+  const [showAltPipeline, setShowAltPipeline] = useState(false)
+  const activeTop = showAltPipeline ? topFlowAlt : topFlow
+  const activeBottom = showAltPipeline ? bottomFlowAlt : bottomFlow
+
   return (
     <section id="process">
       <div className="overflow-x-auto p-10 md:p-10 py-16">
         <div className="min-w-[1080px]">
-          <h2 className="text-xl leading-none text-accent md:text-xl">Process Storyline</h2>
-
-          <div className="relative mt-8">
-            <div className="grid grid-cols-[1fr_38px_1fr_38px_1fr_38px_1fr_38px_1fr] items-start">
-              {topFlow.map((item, index) => (
-                <Fragment key={item.title + index}>
-                  <FlowNode item={item} />
-                  {index < topFlow.length - 1 ? (
-                    <div className="pt-11 text-center text-[2.05rem] text-accent">→</div>
-                  ) : null}
-                </Fragment>
-              ))}
-            </div>
-
-            <div className="mt-10 grid grid-cols-[1fr_38px_1fr_38px_1fr_38px_1fr_38px_1fr] items-start">
-              {[...bottomFlow].map((item, index) => (
-                <Fragment key={item.title + '-b-' + index}>
-                  <FlowNode item={item} />
-                  {index < bottomFlow.length - 1 ? (
-                    <div className="pt-11 text-center text-[2.05rem] text-accent">←</div>
-                  ) : null}
-                </Fragment>
-              ))}
-            </div>
-
-            <div className="pointer-events-none absolute -right-1 top-[44px] flex h-[259px] w-[88px] flex-col items-center justify-between rounded-r-[42px] border-r border-t border-b border-[rgba(204,137,83,0.62)] py-3">
-              <span className="text-[2rem] text-accent">↓</span>
-              <span className="text-[2rem] text-accent">←</span>
-            </div>
+          <div className="flex items-center gap-3">
+            <h2 className="text-xl leading-none text-accent md:text-xl">Process Storyline</h2>
+            <button
+              type="button"
+              onClick={() => {
+                setShowAltPipeline((prev) => !prev)
+              }}
+              className="rounded-full border border-accent px-3 py-1 text-[0.65rem] uppercase tracking-[0.18em] text-accent transition hover:bg-accent hover:text-bg"
+              aria-pressed={showAltPipeline}
+            >
+              {showAltPipeline ? 'View 1' : 'View 2'}
+            </button>
           </div>
+
+          <PipelineFlow key={showAltPipeline ? 'alt' : 'base'} topItems={activeTop} bottomItems={activeBottom} />
         </div>
       </div>
     </section>
