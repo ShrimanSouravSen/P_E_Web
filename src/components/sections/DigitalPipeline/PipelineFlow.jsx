@@ -2,10 +2,15 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import PipelineStep from './PipelineStep'
 
+const WIRE_TEXT_GAP = 24
+const BRIDGE_CORNER_RADIUS = 14
+
 export default function PipelineFlow({ topItems, bottomItems }) {
   const wireCanvasRef = useRef(null)
   const topNodeRefs = useRef([])
   const bottomNodeRefs = useRef([])
+  const topStepRefs = useRef([])
+  const bottomStepRefs = useRef([])
   const [wireLayout, setWireLayout] = useState({
     width: 0,
     height: 0,
@@ -34,28 +39,84 @@ export default function PipelineFlow({ topItems, bottomItems }) {
       }
     }
 
+    const toBounds = (node) => {
+      if (!node) {
+        return null
+      }
+
+      const rect = node.getBoundingClientRect()
+      return {
+        left: rect.left - canvasRect.left,
+        right: rect.right - canvasRect.left,
+      }
+    }
+
     const topPoints = topNodeRefs.current.map(toPoint).filter(Boolean)
     const bottomPoints = bottomNodeRefs.current.map(toPoint).filter(Boolean)
+    const topBounds = topStepRefs.current.map(toBounds)
+    const bottomBounds = bottomStepRefs.current.map(toBounds)
 
     const buildPaths = (points) =>
       points.slice(0, -1).map((point, index) => {
         const next = points[index + 1]
-        const bendX = (point.x + next.x) / 2
-        return `M ${point.x} ${point.y} C ${bendX} ${point.y} ${bendX} ${next.y} ${next.x} ${next.y}`
+        const startX = point.x + point.r - 2
+        const endX = next.x - next.r + 2
+        return `M ${startX} ${point.y} L ${endX} ${next.y}`
       })
 
+    const buildRoundedBridgePath = (startX, startY, bridgeX, endY, endX) => {
+      const horizontalIn = bridgeX - startX
+      const vertical = endY - startY
+      const horizontalOut = endX - bridgeX
+      const maxRadius = Math.min(
+        Math.abs(horizontalIn) / 2,
+        Math.abs(vertical) / 2,
+        Math.abs(horizontalOut) / 2,
+      )
+      const radius = Math.min(BRIDGE_CORNER_RADIUS, maxRadius)
+
+      if (!Number.isFinite(radius) || radius < 0.5) {
+        return `M ${startX} ${startY} L ${bridgeX} ${startY} L ${bridgeX} ${endY} L ${endX} ${endY}`
+      }
+
+      const inDirection = Math.sign(horizontalIn) || 1
+      const verticalDirection = Math.sign(vertical) || 1
+      const outDirection = Math.sign(horizontalOut) || 1
+
+      const firstCornerStartX = bridgeX - inDirection * radius
+      const firstCornerEndY = startY + verticalDirection * radius
+      const secondCornerStartY = endY - verticalDirection * radius
+      const secondCornerEndX = bridgeX + outDirection * radius
+
+      return [
+        `M ${startX} ${startY}`,
+        `L ${firstCornerStartX} ${startY}`,
+        `Q ${bridgeX} ${startY} ${bridgeX} ${firstCornerEndY}`,
+        `L ${bridgeX} ${secondCornerStartY}`,
+        `Q ${bridgeX} ${endY} ${secondCornerEndX} ${endY}`,
+        `L ${endX} ${endY}`,
+      ].join(' ')
+    }
+
     let bridgePath = ''
+    const layoutWidth = canvas.clientWidth
     const topLast = topPoints[topPoints.length - 1]
-    const bottomLast = bottomPoints[bottomPoints.length - 1]
-    if (topLast && bottomLast) {
+    const mouldingIndex = bottomItems.findIndex((item) => item.title?.toLowerCase() === 'moulding')
+    const bridgeBottomIndex = mouldingIndex >= 0 ? mouldingIndex : bottomPoints.length - 1
+    const bottomTarget = bottomPoints[bridgeBottomIndex]
+    if (topLast && bottomTarget) {
       const topStartX = topLast.x + topLast.r - 2
-      const bottomEndX = bottomLast.x + bottomLast.r - 2
-      const bridgeX = Math.max(topStartX, bottomEndX) + 55
-      bridgePath = `M ${topStartX} ${topLast.y} L ${bridgeX} ${topLast.y} L ${bridgeX} ${bottomLast.y} L ${bottomEndX} ${bottomLast.y}`
+      const bottomEndX = bottomTarget.x + bottomTarget.r - 2
+      const allBounds = [...topBounds, ...bottomBounds].filter(Boolean)
+      const textRightEdge = allBounds.reduce((maxRight, bounds) => Math.max(maxRight, bounds.right), 0)
+      const preferredBridgeX = Math.max(topStartX, bottomEndX, textRightEdge) + WIRE_TEXT_GAP
+      const maxBridgeX = Math.max(layoutWidth - 8, Math.max(topStartX, bottomEndX) + 6)
+      const bridgeX = Math.min(preferredBridgeX, maxBridgeX)
+      bridgePath = buildRoundedBridgePath(topStartX, topLast.y, bridgeX, bottomTarget.y, bottomEndX)
     }
 
     setWireLayout({
-      width: canvas.clientWidth,
+      width: layoutWidth,
       height: canvas.clientHeight,
       topPaths: buildPaths(topPoints),
       bottomPaths: buildPaths(bottomPoints),
@@ -66,6 +127,8 @@ export default function PipelineFlow({ topItems, bottomItems }) {
   useEffect(() => {
     topNodeRefs.current.length = topItems.length
     bottomNodeRefs.current.length = bottomItems.length
+    topStepRefs.current.length = topItems.length
+    bottomStepRefs.current.length = bottomItems.length
   }, [topItems.length, bottomItems.length])
 
   useEffect(() => {
@@ -91,7 +154,19 @@ export default function PipelineFlow({ topItems, bottomItems }) {
       }
     })
 
+    topStepRefs.current.forEach((node) => {
+      if (node) {
+        observer.observe(node)
+      }
+    })
+
     bottomNodeRefs.current.forEach((node) => {
+      if (node) {
+        observer.observe(node)
+      }
+    })
+
+    bottomStepRefs.current.forEach((node) => {
       if (node) {
         observer.observe(node)
       }
@@ -106,7 +181,7 @@ export default function PipelineFlow({ topItems, bottomItems }) {
   }, [measureWireLayout, topItems, bottomItems])
 
   return (
-    <div ref={wireCanvasRef} className="relative mt-8">
+    <div ref={wireCanvasRef} className="relative mt-8 overflow-hidden">
       <svg
         className="pointer-events-none absolute inset-0 z-0"
         width={wireLayout.width}
@@ -144,7 +219,7 @@ export default function PipelineFlow({ topItems, bottomItems }) {
             d={wireLayout.bridgePath}
             stroke="currentColor"
             className="text-accent"
-            strokeWidth="1"
+            strokeWidth="1.2"
             strokeLinecap="round"
             strokeLinejoin="round"
             opacity="0.9"
@@ -160,6 +235,9 @@ export default function PipelineFlow({ topItems, bottomItems }) {
           <PipelineStep
             key={item.title + index}
             item={item}
+            stepRef={(node) => {
+              topStepRefs.current[index] = node
+            }}
             circleRef={(node) => {
               topNodeRefs.current[index] = node
             }}
@@ -175,6 +253,9 @@ export default function PipelineFlow({ topItems, bottomItems }) {
           <PipelineStep
             key={item.title + '-b-' + index}
             item={item}
+            stepRef={(node) => {
+              bottomStepRefs.current[index] = node
+            }}
             circleRef={(node) => {
               bottomNodeRefs.current[index] = node
             }}
