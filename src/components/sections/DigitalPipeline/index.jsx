@@ -1,4 +1,5 @@
 import PipelineFlow from './PipelineFlow'
+import { useTheme } from '../../../hooks/useTheme'
 
 const topFlow = [
   {
@@ -77,15 +78,19 @@ const bottomFlow = [
 ]
 
 export default function DigitalPipeline() {
+  const { isDark } = useTheme()
+
   return (
     <section id="process">
       <div className="px-4 py-16 md:px-10">
-        <div className="mx-auto w-full">
+        <div
+          className={`mx-auto w-full`}
+        >
           <p className="mb-2 text-sm uppercase tracking-[0.15em] text-accent">Process Storyline</p>
-          <h2 className="text-4xl leading-tight md:text-5xl">
+          <h2 className="text-4xl leading-tight text-text md:text-5xl">
             From Discarded Metal to Sustainable Resource
           </h2>
-          <p className="mt-4 text-muted">
+          <p className="mt-4 text-muted md:max-w-3xl">
             What begins as scrap is carefully transformed through a series of controlled, high-precision processes into high-purity copper.
           </p>
 

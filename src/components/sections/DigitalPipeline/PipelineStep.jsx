@@ -1,3 +1,5 @@
+import { useTheme } from '../../../hooks/useTheme'
+
 const ACCENT_BORDER_CLASS = 'border border-accent'
 
 function NodeIcon({ type }) {
@@ -63,11 +65,21 @@ function NodeIcon({ type }) {
 }
 
 export default function PipelineStep({ item, circleRef, stepRef }) {
+  const { isDark } = useTheme()
+
+  const nodeShellClass = isDark
+    ? 'bg-[radial-gradient(circle_at_35%_30%,color-mix(in_srgb,var(--color-elevated)_96%,black),color-mix(in_srgb,var(--color-surface)_94%,black))]'
+    : 'bg-[radial-gradient(circle_at_35%_30%,color-mix(in_srgb,var(--color-elevated)_96%,white),color-mix(in_srgb,var(--color-surface)_90%,white))]'
+
+  const tagClass = isDark
+    ? 'bg-[color:color-mix(in_srgb,var(--color-elevated)_84%,black)] text-muted'
+    : 'bg-[color:color-mix(in_srgb,var(--color-surface)_86%,white)] text-[color:color-mix(in_srgb,var(--color-text)_80%,black)]'
+
   return (
     <div ref={stepRef} className="flex w-full min-w-0 flex-col items-center text-center">
       <div
         ref={circleRef}
-        className={`${ACCENT_BORDER_CLASS} flex h-[88px] w-[88px] items-center justify-center rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(49,43,38,0.96),rgba(29,28,30,0.98))]`}
+        className={`${ACCENT_BORDER_CLASS} ${nodeShellClass} flex h-[88px] w-[88px] items-center justify-center rounded-full`}
       >
         <NodeIcon type={item.icon} />
       </div>
@@ -90,7 +102,7 @@ export default function PipelineStep({ item, circleRef, stepRef }) {
       {item.tags?.map((tag) => (
         <p
           key={tag}
-          className={`${ACCENT_BORDER_CLASS} mt-2 w-full max-w-[12rem] break-words rounded-md bg-[rgba(53,52,54,0.76)] px-3 py-1 text-[0.72rem] leading-snug text-muted`}
+          className={`${ACCENT_BORDER_CLASS} ${tagClass} mt-2 w-full max-w-[12rem] break-words rounded-md px-3 py-1 text-[0.72rem] leading-snug`}
         >
           {tag}
         </p>
