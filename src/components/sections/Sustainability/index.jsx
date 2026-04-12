@@ -22,14 +22,14 @@ export default function Sustainability() {
         <div className="grid w-full items-center gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-4">
           <div className="">
             <h3
-              className={`mt-1 text-[2.35rem] font-medium uppercase leading-[0.92] md:text-[2.85rem] ${
+              className={`mt-1 text-[2.35rem] font-medium uppercase leading-[0.92] md:text-4xl ${
                 isDark ? 'text-[rgba(250,245,238,0.98)]' : 'text-[color:color-mix(in_srgb,var(--color-text)_94%,black)]'
               }`}
             >
               Sustainability
             </h3>
             <h3
-              className={`mt-1 text-[2.35rem] font-medium uppercase leading-[0.92] md:text-[2.85rem] ${
+              className={`mt-1 text-[2.35rem] font-medium uppercase leading-[0.92] md:text-4xl ${
                 isDark ? 'text-[rgba(250,245,238,0.98)]' : 'text-[color:color-mix(in_srgb,var(--color-text)_94%,black)]'
               }`}
             >

@@ -29,7 +29,7 @@ export default function Hero({ onOpenQuote }) {
 
         <div className="absolute inset-y-0 left-0 z-10 flex w-full items-center px-6 md:px-10 lg:px-12">
           <div className="max-w-[50rem]">
-
+          <p className="text-md leading-[1.02] md:text-md text-accent">What we do</p>
             <h1
               className={`max-w-[40ch] text-[2.45rem] uppercase leading-[0.92] sm:text-[3.3rem] md:text-[4.3rem] lg:text-[5rem] ${
                 isDark ? 'text-white' : 'text-[color:color-mix(in_srgb,var(--color-text)_94%,black)]'

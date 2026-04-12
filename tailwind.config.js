@@ -33,7 +33,7 @@ export default {
       animation: {
         float: 'float 6s ease-in-out infinite',
         orbit: 'orbit 12s linear infinite',
-        marquee: 'marquee 24s linear infinite',
+        marquee: 'marquee 40s linear infinite',
         pulseGlow: 'pulseGlow 2.6s ease-in-out infinite',
         spinAxisX: 'spinAxisX 9s linear infinite',
         spinAxisY: 'spinAxisY 11s linear infinite',
@@ -49,8 +49,8 @@ export default {
           to: { transform: 'rotate(360deg)' },
         },
         marquee: {
-          from: { transform: 'translateX(0)' },
-          to: { transform: 'translateX(-50%)' },
+          from: { transform: 'translate3d(0, 0, 0)' },
+          to: { transform: 'translate3d(-50%, 0, 0)' },
         },
         pulseGlow: {
           '0%, 100%': { boxShadow: '0 0 0 0 rgba(219, 138, 58, 0.15)' },

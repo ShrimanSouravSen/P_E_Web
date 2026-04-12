@@ -67,13 +67,11 @@ function NodeIcon({ type }) {
 export default function PipelineStep({ item, circleRef, stepRef }) {
   const { isDark } = useTheme()
 
-  const nodeShellClass = isDark
-    ? 'bg-[radial-gradient(circle_at_35%_30%,color-mix(in_srgb,var(--color-elevated)_96%,black),color-mix(in_srgb,var(--color-surface)_94%,black))]'
-    : 'bg-[radial-gradient(circle_at_35%_30%,color-mix(in_srgb,var(--color-elevated)_96%,white),color-mix(in_srgb,var(--color-surface)_90%,white))]'
+  const nodeShellClass = isDark ? 'bg-[#232027]' : 'bg-[#fff8f0]'
 
   const tagClass = isDark
-    ? 'bg-[color:color-mix(in_srgb,var(--color-elevated)_84%,black)] text-muted'
-    : 'bg-[color:color-mix(in_srgb,var(--color-surface)_86%,white)] text-[color:color-mix(in_srgb,var(--color-text)_80%,black)]'
+    ? 'bg-[#1d1b21] text-muted'
+    : 'bg-[#f0e6d8] text-[#241b12]'
 
   return (
     <div ref={stepRef} className="flex w-full min-w-0 flex-col items-center text-center">
@@ -92,7 +90,7 @@ export default function PipelineStep({ item, circleRef, stepRef }) {
       {item.chip ? (
         <p
           className={`mt-3 w-full max-w-[12rem] break-words rounded-md px-3 py-1 text-[0.72rem] leading-snug text-[#141414] ${
-            item.chipTone === 'amber' ? 'bg-[rgba(237,174,92,0.95)]' : 'bg-[rgba(154,189,151,0.9)]'
+            item.chipTone === 'amber' ? 'bg-[#edad5c]' : 'bg-[#9abd97]'
           }`}
         >
           {item.chip}

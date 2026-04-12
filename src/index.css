@@ -348,3 +348,9 @@ html {
     transform: rotate(360deg);
   }
 }
+
+.separator::before {
+  content: '|';
+  margin-right: 2.75rem;
+  color: var(--color-muted);
+}

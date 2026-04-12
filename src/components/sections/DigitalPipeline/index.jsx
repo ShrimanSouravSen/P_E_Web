@@ -1,4 +1,5 @@
 import PipelineFlow from './PipelineFlow'
+import DigitalPipelineMobile from './DigitalPipelineMobile'
 import { useTheme } from '../../../hooks/useTheme'
 
 const topFlow = [
@@ -87,14 +88,17 @@ export default function DigitalPipeline() {
           className={`mx-auto w-full`}
         >
           <p className="mb-2 text-sm uppercase tracking-[0.15em] text-accent">Process Storyline</p>
-          <h2 className="text-4xl leading-tight text-text md:text-5xl">
+          <h2 className="text-4xl leading-tight text-text md:text-4xl">
             From Discarded Metal to Sustainable Resource
           </h2>
-          <p className="mt-4 text-muted md:max-w-3xl">
+          <p className="mt-4 text-muted">
             What begins as scrap is carefully transformed through a series of controlled, high-precision processes into high-purity copper.
           </p>
 
-          <PipelineFlow topItems={topFlow} bottomItems={bottomFlow} />
+          <div className="hidden md:block">
+            <PipelineFlow topItems={topFlow} bottomItems={bottomFlow} />
+          </div>
+          <DigitalPipelineMobile topItems={topFlow} bottomItems={bottomFlow} />
         </div>
       </div>
     </section>
