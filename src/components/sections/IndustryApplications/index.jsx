@@ -1,4 +1,5 @@
 import OrbitalDiagram from './OrbitalDiagram'
+import OrbitAnimation from './OrbitAnimation'
 
 export default function IndustryApplications() {
   return (
@@ -12,7 +13,8 @@ export default function IndustryApplications() {
           </p>
         </div>
         <div className="lg:flex lg:justify-center">
-          <OrbitalDiagram />
+          {/* <OrbitalDiagram /> */}
+          <OrbitAnimation contentScale={0.74} style={{ height: '420px' }} />
         </div>
       </div>
     </section>
