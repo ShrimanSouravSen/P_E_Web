@@ -1,5 +1,5 @@
 import OrbitalDiagram from './OrbitalDiagram'
-import OrbitAnimation from './OrbitAnimation'
+import OrbitAnimation from './OrbitAnimation/OrbitAnimation'
 
 export default function IndustryApplications() {
   return (
