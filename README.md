@@ -20,8 +20,8 @@ In short, this repo is a component-based React frontend with a token-driven desi
 
 ## Target Setup
 
-- WordPress site: `https://yourdomain.com`
-- React app: `https://yourdomain.com/app`
+- WordPress site: `https://parbatienterprises.com`
+- React app: `https://parbatienterprises.com/latest`
 - Deployment: Automated via GitHub Actions
 - Hosting: cPanel (BigRock)
 
@@ -64,7 +64,7 @@ Add the following secrets:
 FTP_SERVER=ftp.yourdomain.com
 FTP_USERNAME=your_username
 FTP_PASSWORD=your_password
-FTP_TARGET_DIR=public_html/app
+FTP_TARGET_DIR=public_html/latest
 
 
 ---
@@ -98,7 +98,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
 
       - name: Install Dependencies
@@ -113,20 +113,21 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: build/
+          local-dir: dist/
           server-dir: ${{ secrets.FTP_TARGET_DIR }}/
           dangerous-clean-slate: true
 ```
 ---
 
-## Step 4: Configure React for Subdirectory Deployment
+## Step 4: Configure Vite for Subdirectory Deployment
 
-Update your package.json:
+Update your `vite.config.js`:
 
-```JSON
-
-"homepage": "/app"
-
+```js
+export default defineConfig({
+  plugins: [react()],
+  base: '/latest/',
+})
 ```
 
 Rebuild your project after this change:
@@ -141,18 +142,18 @@ npm run build
 
 To prevent routing issues on refresh, create a .htaccess file inside:
 
-public_html/app/
+public_html/latest/
 
 Add the following:
 
 ```apache
 
 RewriteEngine On
-RewriteBase /app/
+RewriteBase /latest/
 RewriteRule ^index\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /app/index.html [L]
+RewriteRule . /latest/index.html [L]
 
 ```
 
@@ -160,11 +161,11 @@ RewriteRule . /app/index.html [L]
 1. Developer pushes code to main branch
 2. GitHub Actions triggers workflow
 3. Application is built
-4. Build files are uploaded to public_html/app/
-5. React app is live at /app
+4. Build files are uploaded to public_html/latest/
+5. React app is live at /latest
 
 ## Important Notes
 1. Do not upload files to public_html/ root (this will break WordPress)
-2. Only upload contents of the build/ folder
-3. Ensure .htaccess is correctly placed in /app
-4. Ensure homepage is set correctly to avoid broken asset paths
+2. Only upload contents of the dist/ folder
+3. Ensure .htaccess is correctly placed in /latest
+4. Ensure Vite `base` is set correctly to avoid broken asset paths
