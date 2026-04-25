@@ -1,12 +1,27 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import PipelineStep from './PipelineStep'
+import { motion, useInView } from 'framer-motion'
 
 const WIRE_TEXT_GAP = 24
 const BRIDGE_CORNER_RADIUS = 14
-
 export default function PipelineFlow({ topItems, bottomItems }) {
   const wireCanvasRef = useRef(null)
+  const parentRef = useRef(null)
+  const isInView = useInView(parentRef, { once: true, margin: '-100px' })
+  // Animation variants
+  const parentVariant = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.18,
+      },
+    },
+  }
+  const childVariant = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+  }
   const topNodeRefs = useRef([])
   const bottomNodeRefs = useRef([])
   const topStepRefs = useRef([])
@@ -180,6 +195,15 @@ export default function PipelineFlow({ topItems, bottomItems }) {
     }
   }, [measureWireLayout, topItems, bottomItems])
 
+  // Only animate on desktop (fix SSR/window usage)
+  const [isDesktop, setIsDesktop] = useState(true)
+  useEffect(() => {
+    const checkDesktop = () => setIsDesktop(window.innerWidth >= 768)
+    checkDesktop()
+    window.addEventListener('resize', checkDesktop)
+    return () => window.removeEventListener('resize', checkDesktop)
+  }, [])
+
   return (
     <div ref={wireCanvasRef} className="relative mt-8 overflow-hidden">
       <svg
@@ -227,9 +251,14 @@ export default function PipelineFlow({ topItems, bottomItems }) {
         ) : null}
       </svg>
 
-      <div
+      {/* Top row steps with staggered animation */}
+      <motion.div
+        ref={parentRef}
         className="relative z-10 grid items-start gap-10"
         style={{ gridTemplateColumns: `repeat(${topItems.length}, minmax(0, 1fr))` }}
+        initial="hidden"
+        animate={isDesktop && isInView ? 'visible' : 'hidden'}
+        variants={parentVariant}
       >
         {topItems.map((item, index) => (
           <PipelineStep
@@ -241,13 +270,18 @@ export default function PipelineFlow({ topItems, bottomItems }) {
             circleRef={(node) => {
               topNodeRefs.current[index] = node
             }}
+            animationVariant={childVariant}
           />
         ))}
-      </div>
+      </motion.div>
 
-      <div
+      {/* Bottom row steps with staggered animation */}
+      <motion.div
         className="relative z-10 mt-10 grid items-start gap-10"
         style={{ gridTemplateColumns: `repeat(${bottomItems.length}, minmax(0, 1fr))` }}
+        initial="hidden"
+        animate={isDesktop && isInView ? 'visible' : 'hidden'}
+        variants={parentVariant}
       >
         {bottomItems.map((item, index) => (
           <PipelineStep
@@ -259,9 +293,10 @@ export default function PipelineFlow({ topItems, bottomItems }) {
             circleRef={(node) => {
               bottomNodeRefs.current[index] = node
             }}
+            animationVariant={childVariant}
           />
         ))}
-      </div>
+      </motion.div>
     </div>
   )
 }

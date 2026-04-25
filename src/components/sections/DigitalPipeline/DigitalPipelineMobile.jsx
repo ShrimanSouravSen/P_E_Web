@@ -42,22 +42,10 @@ export default function DigitalPipelineMobile({ topItems, bottomItems }) {
   ]
 
   return (
-    <div className="mt-8 space-y-4 md:hidden">
-      <div className="space-y-2">
+    <div className="mt-8 md:hidden">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {orderedSteps.map(({ item, flowHint }, index) => (
-          <div key={`${item.title}-${index}`}>
-            <MobileStepCard item={item} index={index} flowHint={flowHint} />
-            {/* {index === topItems.length - 1 ? (
-              <div className="flex items-center justify-center py-1">
-                <span className="text-[0.65rem] uppercase tracking-[0.06em] text-accent">Refining to Moulding</span>
-              </div>
-            ) : null} */}
-            {index < orderedSteps.length - 1 ? (
-              <div className="flex justify-center py-1" aria-hidden="true">
-                <span className="text-base font-semibold text-accent">↓</span>
-              </div>
-            ) : null}
-          </div>
+          <MobileStepCard key={`${item.title}-${index}`} item={item} index={index} flowHint={flowHint} />
         ))}
       </div>
     </div>
