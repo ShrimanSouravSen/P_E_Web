@@ -190,7 +190,7 @@ export default function Footer() {
               </blockquote>
               <div className="mt-6 h-px w-10 bg-accent" />
               <p className="mt-6 font-heading text-lg font-bold text-accent">
-                Late Shri Parbati Nayak
+                Ramakanta Nayak
               </p>
               <p className="mt-1 text-base text-muted">Founder</p>
             </div>
