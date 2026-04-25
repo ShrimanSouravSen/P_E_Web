@@ -1,4 +1,5 @@
 import { useTheme } from '../../../hooks/useTheme'
+import { motion } from 'framer-motion'
 
 const ACCENT_BORDER_CLASS = 'border border-accent'
 
@@ -64,17 +65,19 @@ function NodeIcon({ type }) {
   )
 }
 
-export default function PipelineStep({ item, circleRef, stepRef }) {
+export default function PipelineStep({ item, circleRef, stepRef, animationVariant }) {
   const { isDark } = useTheme()
-
   const nodeShellClass = isDark ? 'bg-[#232027]' : 'bg-[#fff8f0]'
-
   const tagClass = isDark
     ? 'bg-[#1d1b21] text-muted'
     : 'bg-[#f0e6d8] text-[#241b12]'
 
   return (
-    <div ref={stepRef} className="flex w-full min-w-0 flex-col items-center text-center">
+    <motion.div
+      ref={stepRef}
+      className="flex w-full min-w-0 flex-col items-center text-center"
+      variants={animationVariant}
+    >
       <div
         ref={circleRef}
         className={`${ACCENT_BORDER_CLASS} ${nodeShellClass} flex h-[88px] w-[88px] items-center justify-center rounded-full`}
@@ -105,6 +108,6 @@ export default function PipelineStep({ item, circleRef, stepRef }) {
           {tag}
         </p>
       ))}
-    </div>
+    </motion.div>
   )
 }
