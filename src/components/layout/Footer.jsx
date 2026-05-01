@@ -192,7 +192,7 @@ export default function Footer() {
               <p className="mt-6 font-heading text-lg font-bold text-accent">
                 Ramakanta Nayak
               </p>
-              <p className="mt-1 text-base text-muted">Founder</p>
+              <p className="mt-1 text-base text-muted">Originator</p>
             </div>
           </div>
         </section>
