@@ -1,6 +1,7 @@
 import OdishaSasanLogo from '../../../assets/Odisha-sasan-logo.png'
 import CopperIngotsImage from '../../../assets/copper_ingots.png'
 import CopperScrapImage from '../../../assets/Copper_Scrap.png'
+import ERPImage from '../../../assets/erp.png'
 import { useTheme } from '../../../hooks/useTheme.js'
 
 
@@ -126,7 +127,7 @@ export default function Mission() {
           <div className="relative z-10 flex h-full flex-col justify-center pr-[12.5rem]">
             <h3 className="text-[1.5rem] uppercase leading-[0.92] text-[#122415]">Sustainability in Action</h3>
             <p className="mt-2 text-[0.98rem] leading-[1.35] text-[#203225]">
-              Reducing mining demand, lowering environmental impact.
+              Prioritizing scrap, lowering environmental impact.
             </p>
           </div>
           <div className="pointer-events-none absolute inset-y-0 right-3 flex h-full max-h-full w-[13rem] items-end opacity-90">
@@ -179,17 +180,14 @@ export default function Mission() {
           <div className="border-b border-line px-5 py-4">
             <h3 className="text-[1.5rem] uppercase leading-[0.95] text-text">ERP Integration</h3>
           </div>
-          <div className="grid gap-2 p-4 text-[0.78rem] text-muted">
-            <div className="rounded-md border border-line bg-surface px-3 py-2">Traceability Dashboard</div>
-            <div className="grid grid-cols-3 gap-2">
-              <div className="rounded-md border border-line bg-surface px-2 py-2 text-center">Scrap</div>
-              <div className="rounded-md border border-line bg-surface px-2 py-2 text-center">Refining</div>
-              <div className="rounded-md border border-line bg-surface px-2 py-2 text-center">Dispatch</div>
-            </div>
-            <div className="rounded-md border border-accent/50 bg-accentSoft/50 px-3 py-2 text-[0.72rem] text-text">
-              Batch processed with linked QA metadata.
-            </div>
-          </div>
+          <img
+              src={ERPImage}
+              alt="ERP integration visual"
+              className="h-[210px] w-full"
+              style={{
+                filter: isDark ? 'brightness(0.9) contrast(1.08)' : 'brightness(0.98) contrast(1.05)',
+              }}
+            />
         </article>
 
         {/* Team spotlight image card */}
