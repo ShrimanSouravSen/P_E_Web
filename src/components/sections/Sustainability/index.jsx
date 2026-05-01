@@ -1,9 +1,28 @@
+import { useRef } from 'react'
 import SustainabilityVideo from '../../../assets/sustainability.mp4'
 import { useTheme } from '../../../hooks/useTheme'
 import DonutChart from './DonutChart'
 
+const VIDEO_START_TIME = 4
+
 export default function Sustainability() {
   const { isDark } = useTheme()
+  const videoRef = useRef(null)
+
+  const startVideoFromOffset = () => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.currentTime = VIDEO_START_TIME
+  }
+
+  const restartVideoFromOffset = () => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.currentTime = VIDEO_START_TIME
+    video.play()
+  }
 
   return (
     <section id="sustainability">
@@ -15,13 +34,15 @@ export default function Sustainability() {
         }`}
       >
         <video
+          ref={videoRef}
           src={SustainabilityVideo}
           aria-label="Sustainable copper processing"
           autoPlay
           muted
-          loop
           playsInline
           preload="auto"
+          onLoadedMetadata={startVideoFromOffset}
+          onEnded={restartVideoFromOffset}
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <div
