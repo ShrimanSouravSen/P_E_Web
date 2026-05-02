@@ -9,14 +9,14 @@ const navItems = ['Home', 'About', 'Process', 'Sustainability', 'Applications']
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { isDark } = useTheme()
-  const logoSrc = isDark ? logoDark : logoLight;
+  // const logoSrc = isDark ? logoDark : logoLight;
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur-md">
       <div className="mx-auto flex items-center justify-between px-6 py-4 md:px-10">
         <a href="/" className="group flex items-center focus:outline-none">
           <img
-            src={logoSrc}
+            src={logoDark}
             alt="Parbati Enterprises"
             className="h-10 w-auto transition group-hover:opacity-80"
           />
@@ -34,12 +34,23 @@ export default function Navbar() {
           <ThemeToggle />
           <button
             type="button"
-            aria-label="Toggle navigation menu"
+            aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={isMobileMenuOpen}
-            className="rounded-full border border-line px-3 py-1.5 text-xs text-muted lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full border border-line text-muted transition hover:text-text lg:hidden"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
           >
-            {isMobileMenuOpen ? 'Close' : 'Menu'}
+            {isMobileMenuOpen ? (
+              <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            ) : (
+              <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            )}
           </button>
         </div>
       </div>

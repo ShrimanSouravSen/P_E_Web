@@ -6,25 +6,25 @@ const quickLinks = [
   ['Process', '#process'],
   ['Sustainability', '#sustainability'],
   ['Applications', '#applications'],
-  ['Quality & Certification', '#quality'],
-  ['Careers', '#careers'],
-  ['Contact Us', '#contact'],
+  // ['Quality & Certification', '#quality'],
+  // ['Careers', '#careers'],
+  // ['Contact Us', '#contact'],
 ]
 
 const contactItems = [
-  {
-    label: '+91 00000 00000',
-    icon: (
-      <path
-        d="M21 16.5v3a1.5 1.5 0 0 1-1.64 1.49 19.8 19.8 0 0 1-8.63-3.07 19.48 19.48 0 0 1-6-6A19.8 19.8 0 0 1 1.66 3.25 1.5 1.5 0 0 1 3.15 1.6h3a1.5 1.5 0 0 1 1.49 1.29c.1.8.28 1.58.54 2.33a1.5 1.5 0 0 1-.34 1.58L6.57 8.07a16 16 0 0 0 6 6l1.27-1.27a1.5 1.5 0 0 1 1.58-.34c.75.26 1.53.44 2.33.54A1.5 1.5 0 0 1 21 16.5Z"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-      />
-    ),
-  },
+  // {
+  //   label: '+91 00000 00000',
+  //   icon: (
+  //     <path
+  //       d="M21 16.5v3a1.5 1.5 0 0 1-1.64 1.49 19.8 19.8 0 0 1-8.63-3.07 19.48 19.48 0 0 1-6-6A19.8 19.8 0 0 1 1.66 3.25 1.5 1.5 0 0 1 3.15 1.6h3a1.5 1.5 0 0 1 1.49 1.29c.1.8.28 1.58.54 2.33a1.5 1.5 0 0 1-.34 1.58L6.57 8.07a16 16 0 0 0 6 6l1.27-1.27a1.5 1.5 0 0 1 1.58-.34c.75.26 1.53.44 2.33.54A1.5 1.5 0 0 1 21 16.5Z"
+  //       fill="none"
+  //       stroke="currentColor"
+  //       strokeLinecap="round"
+  //       strokeLinejoin="round"
+  //       strokeWidth="2"
+  //     />
+  //   ),
+  // },
   {
     label: 'info@parbatienterprises.com',
     icon: (
@@ -56,18 +56,58 @@ const contactItems = [
   },
 ]
 
+// The svg codes for the below icons are sourced from Tabler Icons (https://tabler-icons.io/) and are used under the MIT License.
 const socialLinks = [
-  ['LinkedIn', 'in'],
-  ['Facebook', 'f'],
-  ['Instagram', 'ig'],
-  ['YouTube', 'yt'],
+  {
+    label: 'LinkedIn',
+    icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-linkedin">
+	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+	<path d="M8 11v5" />
+	<path d="M8 8v.01" />
+	<path d="M12 16v-5" />
+	<path d="M16 16v-3a2 2 0 1 0 -4 0" />
+	<path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10" />
+</svg>
+    ),
+  },
+  {
+    label: 'Facebook',
+    icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook">
+	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+	<path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+</svg>
+    ),
+  },
+  {
+    label: 'Instagram',
+    icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram">
+	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+	<path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8" />
+	<path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+	<path d="M16.5 7.5v.01" />
+</svg>
+    ),
+  },
+  {
+    label: 'YouTube',
+    icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-youtube">
+	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+	<path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8" />
+	<path d="M10 9l5 3l-5 3l0 -6" />
+</svg>
+    ),
+  },
 ]
 
 function FooterIcon({ children, className = '' }) {
   return (
     <svg
       aria-hidden="true"
-      className={`h-6 w-6 shrink-0 text-accent ${className}`}
+      className={`h-6 w-6 shrink-0 text-current ${className}`}
       viewBox="0 0 24 24"
     >
       {children}
@@ -107,14 +147,16 @@ export default function Footer() {
               Follow Us
             </h2>
             <div className="mt-4 flex flex-wrap gap-4">
-              {socialLinks.map(([label, mark]) => (
+              {socialLinks.map(({ label, icon }) => (
                 <a
                   key={label}
                   href="#social"
                   aria-label={label}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-accent text-lg font-semibold leading-none text-accent transition hover:bg-accent hover:text-bg"
+                  className="grid h-10 w-10 place-items-center rounded-full border border-accent text-accent transition hover:bg-accent hover:text-bg"
                 >
-                  {mark}
+                  <FooterIcon className="h-5 w-5">
+                    {icon}
+                  </FooterIcon>
                 </a>
               ))}
             </div>
