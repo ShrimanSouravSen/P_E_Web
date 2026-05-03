@@ -66,10 +66,20 @@ export default function PipelineFlow({ topItems, bottomItems }) {
       }
     }
 
-    const topPoints = topNodeRefs.current.map(toPoint).filter(Boolean)
-    const bottomPoints = bottomNodeRefs.current.map(toPoint).filter(Boolean)
+    const rawTopPoints = topNodeRefs.current.map(toPoint).filter(Boolean)
+    const rawBottomPoints = bottomNodeRefs.current.map(toPoint).filter(Boolean)
     const topBounds = topStepRefs.current.map(toBounds)
     const bottomBounds = bottomStepRefs.current.map(toBounds)
+
+    // Average Y stabilization to ensure perfectly horizontal lines despite minor render/animation offsets
+    const stabilizeY = (points) => {
+      if (points.length === 0) return points
+      const avgY = points.reduce((acc, p) => acc + p.y, 0) / points.length
+      return points.map(p => ({ ...p, y: avgY }))
+    }
+
+    const topPoints = stabilizeY(rawTopPoints)
+    const bottomPoints = stabilizeY(rawBottomPoints)
 
     const buildPaths = (points) =>
       points.slice(0, -1).map((point, index) => {
@@ -119,7 +129,12 @@ export default function PipelineFlow({ topItems, bottomItems }) {
     const mouldingIndex = bottomItems.findIndex((item) => item.title?.toLowerCase() === 'moulding')
     const bridgeBottomIndex = mouldingIndex >= 0 ? mouldingIndex : bottomPoints.length - 1
     const bottomTarget = bottomPoints[bridgeBottomIndex]
+
     if (topLast && bottomTarget) {
+      // Use the stabilized Y from each row
+      const topRowY = topLast.y
+      const bottomRowY = bottomTarget.y
+
       const topStartX = topLast.x + topLast.r - 2
       const bottomEndX = bottomTarget.x + bottomTarget.r - 2
       const allBounds = [...topBounds, ...bottomBounds].filter(Boolean)
@@ -127,7 +142,8 @@ export default function PipelineFlow({ topItems, bottomItems }) {
       const preferredBridgeX = Math.max(topStartX, bottomEndX, textRightEdge) + WIRE_TEXT_GAP
       const maxBridgeX = Math.max(layoutWidth - 8, Math.max(topStartX, bottomEndX) + 6)
       const bridgeX = Math.min(preferredBridgeX, maxBridgeX)
-      bridgePath = buildRoundedBridgePath(topStartX, topLast.y, bridgeX, bottomTarget.y, bottomEndX)
+
+      bridgePath = buildRoundedBridgePath(topStartX, topRowY, bridgeX, bottomRowY, bottomEndX)
     }
 
     setWireLayout({

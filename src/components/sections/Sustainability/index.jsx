@@ -27,11 +27,7 @@ export default function Sustainability() {
   return (
     <section id="sustainability">
       <div
-        className={`relative flex min-h-[440px] items-center overflow-hidden border shadow-panel md:min-h-[520px] ${
-          isDark
-            ? 'border-[rgba(226,211,185,0.16)]'
-            : 'border-[color:color-mix(in_srgb,var(--color-line)_78%,white)]'
-        }`}
+        className={`relative flex min-h-[440px] items-center overflow-hidden md:min-h-[520px]`}
       >
         <video
           ref={videoRef}

@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import logoDark from '../../assets/logo-dark.png'
-import logoLight from '../../assets/logo-light.png'
+import logo from '../../assets/logo.png'
 import { useTheme } from '../../hooks/useTheme'
 import ThemeToggle from '../ui/ThemeToggle'
 
@@ -8,30 +7,28 @@ const navItems = ['Home', 'About', 'Process', 'Sustainability', 'Applications']
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { isDark } = useTheme()
-  // const logoSrc = isDark ? logoDark : logoLight;
+// const logoSrc = logo;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur-md">
+    <header className="sticky top-0 z-40 bg-bg/85 backdrop-blur-md">
       <div className="mx-auto flex items-center justify-between px-6 py-4 md:px-10">
         <a href="/" className="group flex items-center focus:outline-none">
           <img
-            src={logoDark}
+            src={logo}
             alt="Parbati Enterprises"
             className="h-10 w-auto transition group-hover:opacity-80"
           />
         </a>
 
-        <nav className="hidden items-center gap-7 text-sm text-muted lg:flex">
-          {navItems.map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="transition hover:text-text">
-              {item}
-            </a>
-          ))}
-        </nav>
-
         <div className="flex items-center gap-3">
-          <ThemeToggle />
+          <nav className="hidden items-center gap-7 text-sm text-muted lg:flex">
+            {navItems.map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} className="transition hover:text-text">
+                {item}
+              </a>
+            ))}
+          </nav>
+          <div className="hidden h-8 w-px bg-line lg:block" aria-hidden="true" />
           <button
             type="button"
             aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -52,6 +49,7 @@ export default function Navbar() {
               </svg>
             )}
           </button>
+          <ThemeToggle />
         </div>
       </div>
 

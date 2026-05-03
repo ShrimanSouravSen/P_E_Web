@@ -224,7 +224,7 @@
 .oa-label-bubble {
   position: absolute;
   top: calc(100% + 12px);
-  z-index: 65;
+  z-index: 99999;
   padding: 7px;
   border-radius: 12px;
   border: 1px solid var(--oa-bubble-border);

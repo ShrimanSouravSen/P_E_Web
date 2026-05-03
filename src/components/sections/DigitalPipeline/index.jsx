@@ -4,7 +4,7 @@ import { useTheme } from '../../../hooks/useTheme'
 
 const topFlow = [
   {
-    title: 'SCRAP INTAKE',
+    title: 'Scrap Intake',
     icon: 'scrap',
     chip: 'Current Intake: 272M tonnes (FY25)',
     chipTone: 'green',
