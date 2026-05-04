@@ -34,7 +34,7 @@ export const LABEL_PREVIEW_IMAGES = {
     'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80',
   ],
   Household: [
-    'https://images.unsplash.com/photo-1588854337110-9cbbd1c8e819?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=800&q=80',
   ],

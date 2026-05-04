@@ -60,8 +60,8 @@ export default function Hero({ onOpenQuote }) {
   }
 
   return (
-    <section id="home" className="grain border-b border-line">
-      <div className="relative overflow-hidden shadow-panel">
+    <section id="home" className="grain">
+      <div className="relative overflow-hidden">
         <div className="relative h-[360px] w-full md:h-[460px] lg:h-[520px]">
           {[0, 1].map((videoIndex) => (
             <video

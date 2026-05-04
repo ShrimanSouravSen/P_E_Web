@@ -95,7 +95,7 @@ function LabelsScene({
   return (
     <motion.div
       ref={labelsRootRef}
-      style={{ ...ABS_FILL, pointerEvents: 'none' }}
+      style={{ ...ABS_FILL, pointerEvents: 'none', zIndex: 99999 }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -128,6 +128,7 @@ function LabelsScene({
                 maxWidth: '42%',
                 pointerEvents: labelsReady ? 'auto' : 'none',
                 outline: 'none',
+                zIndex: hoveredIndex === i ? 999999 : 99999,
               }}
             >
               <motion.div
