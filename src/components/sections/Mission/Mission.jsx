@@ -123,7 +123,7 @@ export default function Mission() {
           <div className="relative z-10 max-w-2xl">
             <p className="text-md leading-[1.02] md:text-md text-accent">Purity Forged from History</p>
             <h2 className="mt-1 text-[2.05rem] leading-[1.02] text-text md:text-4xl">
-              We don't mine the earth. We refine it.
+              We don't mine the earth. We transform trash to treasure.
             </h2>
             <p className="mt-3 text-[1.02rem] text-muted">
               Exclusively Urban Mining — Extracting Copper from Scrap, Not Ore.

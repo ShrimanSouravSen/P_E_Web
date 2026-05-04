@@ -186,12 +186,11 @@ export default function Footer() {
               <div className="flex items-center justify-between gap-4">
                 <address className="not-italic">
                   <p className="max-w-[15rem] font-body text-base uppercase leading-7 tracking-wide text-muted">
-                    PLOT NO.- 177, KATI NO.- 83/100, MOUZA- PRASANNAPUR, PS- GURUDIJHATIA, DIST-
-                    CUTTACK, ODISHA, 754027
+                    Registered Office<br/> Balasore Odisha 756001
                   </p>
                 </address>
 
-                <a
+                {/* <a
                   href="https://www.google.com/maps/search/?api=1&query=Parbati+Enterprises+Prasannapur+Cuttack+Odisha+754027"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -213,7 +212,50 @@ export default function Footer() {
                   <span className="mt-1 text-[9px] font-bold uppercase tracking-widest text-muted/60 transition group-hover:text-accent">
                     Locate Us
                   </span>
-                </a>
+                </a> */}
+              </div>
+            </div>
+            <div className="flex items-start gap-6">
+              <FooterIcon className="mt-3">
+                <path
+                  d="M3 3h18v4H3zm0 6h18v10H3zm2-2h2v2H5zm12 0h2v2h-2zm-10 8h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2zm4 0h2v2h-2z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                />
+              </FooterIcon>
+              <div className="flex items-center justify-between gap-4">
+                <address className="not-italic">
+                  <p className="max-w-[15rem] font-body text-base uppercase leading-7 tracking-wide text-muted">
+                    Production Unit <br />Cuttack Odisha 754027
+                  </p>
+                </address>
+
+                {/* <a
+                  href="https://www.google.com/maps/search/?api=1&query=Parbati+Enterprises+Prasannapur+Cuttack+Odisha+754027"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative flex h-20 w-20 shrink-0 flex-col items-center justify-center overflow-hidden rounded-md border border-line bg-elevated/50 shadow-sm transition hover:border-accent/40 hover:bg-elevated/80"
+                >
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,var(--color-accent)_0%,transparent_100%)] opacity-10 transition group-hover:opacity-20" />
+                  <svg
+                    className="h-7 w-7 text-accent transition-transform duration-300 group-hover:scale-110"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 21s7-7.1 7-13a7 7 0 0 0-14 0c0 5.9 7 13 7 13Z" />
+                    <circle cx="12" cy="8" r="2.5" />
+                  </svg>
+                  <span className="mt-1 text-[9px] font-bold uppercase tracking-widest text-muted/60 transition group-hover:text-accent">
+                    Locate Us
+                  </span>
+                </a> */}
               </div>
             </div>
           </div>
