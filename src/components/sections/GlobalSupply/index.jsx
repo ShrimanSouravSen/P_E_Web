@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useTheme } from '../../../hooks/useTheme.js'
 import worldMap from '../../../assets/world_map.svg'
 
@@ -28,8 +29,78 @@ const routeDefinitions = [
   { id: 'australia', path: australiaRoutePath, dashPath: australiaRoutePathReverse, color: '#00ff18', dashFrom: 0, dashTo: -44 },
 ]
 
+const portPreviews = {
+  uk: {
+    title: 'Rotterdam Port',
+    description: 'Primary European copper entry hub with customs-ready logistics.',
+    images: [
+      'https://images.unsplash.com/photo-1507120410856-1f35574c3b45?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80',
+    ],
+  },
+  china: {
+    title: 'Shanghai Port',
+    description: 'Asia Pacific export gateway with high-volume manufacturing throughput.',
+    images: [
+      'https://images.unsplash.com/photo-1517292987719-0369a794ec0f?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1483721310020-03333e577078?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1518544888074-6cfd8698ee6b?auto=format&fit=crop&w=800&q=80',
+    ],
+  },
+  'south-america': {
+    title: 'Santos Port',
+    description: 'South America logistics node for raw copper and material exports.',
+    images: [
+      'https://images.unsplash.com/photo-1509223197845-458d87318791?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1519392445616-9099407b4b26?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=800&q=80',
+    ],
+  },
+  africa: {
+    title: 'Durban Port',
+    description: 'Strategic African partner for coastal distribution and inland transit.',
+    images: [
+      'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1468581264421-a80f4c6dc395?auto=format&fit=crop&w=800&q=80',
+    ],
+  },
+  australia: {
+    title: 'Sydney Port',
+    description: 'Outbound supply channel for Asia-Pacific infrastructure and energy markets.',
+    images: [
+      'https://images.unsplash.com/photo-1488449077988-6cbb5edb1aa1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1523800503107-5bc3ba2f2e83?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1501390352907-5b1a7bf02f73?auto=format&fit=crop&w=800&q=80',
+    ],
+  },
+}
+
 export default function GlobalSupply() {
   const { isDark } = useTheme()
+  const [activePort, setActivePort] = useState(null)
+  const [isTouchDevice, setIsTouchDevice] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    setIsTouchDevice(window.matchMedia('(hover: none)').matches || navigator.maxTouchPoints > 0)
+  }, [])
+
+  const handlePortEnter = (portId) => {
+    if (isTouchDevice) return
+    setActivePort(portId)
+  }
+
+  const handlePortLeave = () => {
+    if (isTouchDevice) return
+    setActivePort(null)
+  }
+
+  const handlePortClick = (portId) => {
+    if (!isTouchDevice) return
+    setActivePort((current) => (current === portId ? null : portId))
+  }
 
   return (
     <section className="px-6 py-14 md:px-10 md:py-16">
@@ -37,8 +108,8 @@ export default function GlobalSupply() {
         <h3 className="text-3xl md:text-4xl">Local Integrity, Global Supply</h3>
         <p className="mx-auto mt-2 max-w-xl text-muted">Logistics aligned to global partners with fully traceable dispatch documents.</p>
       </div>
-      <div className="mt-8">
-        <div className="relative overflow-hidden p-4 md:p-6">
+      <div className="mt-8 p-4 md:p-6">
+        <div className="relative overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_52%_42%,rgba(219,138,58,0.16),transparent_34%)]" />
           <svg
             viewBox="0 0 1000 450"
@@ -46,7 +117,7 @@ export default function GlobalSupply() {
             aria-labelledby="global-supply-title global-supply-description"
             className="relative z-10 h-auto w-full"
           >
-            <title id="global-supply-title">Local Integrity, Global Supply</title>
+            {/* <title id="global-supply-title">Local Integrity, Global Supply</title> */}
             <desc id="global-supply-description">
               A world map showing an animated supply route from Rotterdam to Bengaluru.
             </desc>
@@ -143,25 +214,63 @@ export default function GlobalSupply() {
 
             <g>
               {ports.map((port) => (
-                <g key={port.id} transform={`translate(${port.x} ${port.y})`}>
+                <g
+                  key={port.id}
+                  transform={`translate(${port.x} ${port.y})`}
+                  className="cursor-pointer"
+                  onPointerEnter={() => handlePortEnter(port.id)}
+                  onPointerLeave={handlePortLeave}
+                >
                   <circle r="20" fill={port.type === 'inbound' && port.id !== 'destination' ? 'var(--color-accent)' : port.id !== 'destination' ? '#00ff18' : 'blue'} opacity="0.12">
                     <animate attributeName="r" values="12;22;12" dur="2.6s" repeatCount="indefinite" />
                     <animate attributeName="opacity" values="0.2;0;0.2" dur="2.6s" repeatCount="indefinite" />
                   </circle>
                   <circle r="5" fill="#fff3df" />
                   <circle r="3" fill={port.type === 'inbound' && port.id !== 'destination' ? 'var(--color-accent)' : port.id !== 'destination' ? '#00ff18' : 'blue'} />
-                  {/* <text
-                    x={port.id === 'uk' ? -12 : 12}
-                    y="-15"
-                    textAnchor={port.id === 'uk' ? 'end' : 'start'}
-                    className="fill-muted text-[18px] md:text-[15px]"
-                  >
-                    {port.name}
-                  </text> */}
                 </g>
               ))}
             </g>
           </svg>
+          {ports.map((port) => {
+            const isActive = activePort === port.id
+            const side = port.x > 500 ? 'right' : 'left'
+            const bubbleClass = `oa-label-bubble`
+            return (
+              <button
+                key={`${port.id}-button`}
+                type="button"
+                aria-label={`${port.name} preview`}
+                onFocus={() => setActivePort(port.id)}
+                onBlur={handlePortLeave}
+                onClick={() => handlePortClick(port.id)}
+                className="group absolute z-20"
+                style={{ left: `${(port.x / 1000) * 100}%`, top: `${(port.y / 450) * 100}%`, zIndex: isActive ? 99999 : 20 }}
+              >
+                <div
+                  className={bubbleClass}
+                  style={{
+                    position: 'absolute',
+                    top: '20px',
+                    left: '50%',
+                    pointerEvents: 'none',
+                    opacity: isActive ? 1 : 0,
+                    visibility: isActive ? 'visible' : 'hidden',
+                    transform: isActive ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(10px)',
+                    transition: 'opacity 0.2s ease, transform 0.5s ease',
+                    backgroundColor: 'var(--color-elevated)',
+                    border: '1px solid var(--color-accent)',
+                    color: 'var(--color-text)',
+                    padding: '5px 10px',
+                    borderRadius: '5px',
+                    whiteSpace: 'nowrap',
+                    textAlign: 'center',
+                  }}
+                >
+                  <div className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>{port.name}</div>
+                </div>
+              </button>
+            )
+          })}
         </div>
       </div>
     </section>

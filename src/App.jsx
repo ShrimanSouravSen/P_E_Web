@@ -2,6 +2,7 @@ import { useState } from 'react'
 import AnnouncementBar from './components/layout/AnnouncementBar.jsx'
 import Navbar from './components/layout/Navbar.jsx'
 import Footer from './components/layout/Footer.jsx'
+import SubFooter from './components/layout/SubFooter.jsx'
 import Hero from './components/sections/Hero.jsx'
 import Ticker from './components/sections/Ticker.jsx'
 import Mission from './components/sections/Mission/Mission.jsx'
@@ -27,6 +28,7 @@ function App() {
         <IndustryApplications />
         <GlobalSupply />
         <Footer />
+        <SubFooter />
       </div>
       <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
     </div>

@@ -108,9 +108,10 @@ export function OrbitAnimation({
       className={[className, 'oa-root', isDark ? 'oa-theme-dark' : 'oa-theme-light'].filter(Boolean).join(' ')}
       style={{
         position: 'relative',
+        zIndex: 9999,
         width: '100%',
         height: '100vh',
-        overflow: 'hidden',
+        overflow: 'visible',
         background: 'transparent',
         fontFamily: "'Inter', sans-serif",
         color: 'var(--oa-label-color)',
@@ -218,7 +219,7 @@ export function OrbitAnimation({
       </motion.div>
 
       {/* ── LABELS — always visible ─────────────────────────────────── */}
-      <div style={{ ...ABS_FILL, zIndex: 30, pointerEvents: 'none' }}>
+      <div style={{ ...ABS_FILL, zIndex: 999999, pointerEvents: 'none' }}>
         <LabelsScene
           labels={labels}
           fontSizePx={labelFontSizePx}

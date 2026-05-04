@@ -1,4 +1,5 @@
 import founderImage from '../../assets/founder.png'
+import { useTheme } from '../../hooks/useTheme'
 
 const quickLinks = [
   ['Home', '#home'],
@@ -61,44 +62,44 @@ const socialLinks = [
   {
     label: 'LinkedIn',
     icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-linkedin">
-	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-	<path d="M8 11v5" />
-	<path d="M8 8v.01" />
-	<path d="M12 16v-5" />
-	<path d="M16 16v-3a2 2 0 1 0 -4 0" />
-	<path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10" />
-</svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-linkedin">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M8 11v5" />
+        <path d="M8 8v.01" />
+        <path d="M12 16v-5" />
+        <path d="M16 16v-3a2 2 0 1 0 -4 0" />
+        <path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10" />
+      </svg>
     ),
   },
   {
     label: 'Facebook',
     icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook">
-	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-	<path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
-</svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+      </svg>
     ),
   },
   {
     label: 'Instagram',
     icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram">
-	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-	<path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8" />
-	<path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-	<path d="M16.5 7.5v.01" />
-</svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8" />
+        <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+        <path d="M16.5 7.5v.01" />
+      </svg>
     ),
   },
   {
     label: 'YouTube',
     icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-youtube">
-	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-	<path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8" />
-	<path d="M10 9l5 3l-5 3l0 -6" />
-</svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-youtube">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8" />
+        <path d="M10 9l5 3l-5 3l0 -6" />
+      </svg>
     ),
   },
 ]
@@ -116,6 +117,9 @@ function FooterIcon({ children, className = '' }) {
 }
 
 export default function Footer() {
+  const { isDark } = useTheme()
+
+
   return (
     <footer className="border-t border-line bg-bg px-4 py-8 text-muted transition-colors duration-300 md:px-6 lg:px-8">
       <div className="mx-auto grid max-w-[1440px] gap-3 lg:grid-cols-[0.92fr_1.06fr_1.38fr]">
@@ -164,24 +168,10 @@ export default function Footer() {
         </section>
 
         <section className="rounded-md border border-line bg-elevated/70 px-9 py-8 shadow-[0_16px_34px_rgba(68,44,20,0.12)] transition-colors duration-300 dark:bg-surface/40 dark:shadow-panel">
-          <div className="flex items-center gap-6">
-            <FooterIcon>
-              <path
-                d="M12 21s7-7.1 7-13a7 7 0 0 0-14 0c0 5.9 7 13 7 13Z"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-              />
-              <circle cx="12" cy="8" r="2.5" fill="none" stroke="currentColor" strokeWidth="2" />
-            </FooterIcon>
+          <div className="space-y-5">
             <h2 className="font-heading text-sm font-bold uppercase tracking-[0.28em] text-accent">
               Our Address
             </h2>
-          </div>
-
-          <div className="mt-6 border-t border-line pt-7">
             <div className="flex items-start gap-6">
               <FooterIcon className="mt-3">
                 <path
@@ -193,12 +183,38 @@ export default function Footer() {
                   strokeWidth="2"
                 />
               </FooterIcon>
-              <address className="not-italic">
-                <p className="max-w-[16rem] font-body text-base uppercase leading-8 tracking-wide text-muted">
-                  PLOT NO.- 177, KATI NO.- 83/100, MOUZA- PRASANNAPUR, PS- GURUDIJHATIA, DIST-
-                  CUTTACK, ODISHA, 754027
-                </p>
-              </address>
+              <div className="flex items-center justify-between gap-4">
+                <address className="not-italic">
+                  <p className="max-w-[15rem] font-body text-base uppercase leading-7 tracking-wide text-muted">
+                    PLOT NO.- 177, KATI NO.- 83/100, MOUZA- PRASANNAPUR, PS- GURUDIJHATIA, DIST-
+                    CUTTACK, ODISHA, 754027
+                  </p>
+                </address>
+
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Parbati+Enterprises+Prasannapur+Cuttack+Odisha+754027"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative flex h-20 w-20 shrink-0 flex-col items-center justify-center overflow-hidden rounded-md border border-line bg-elevated/50 shadow-sm transition hover:border-accent/40 hover:bg-elevated/80"
+                >
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,var(--color-accent)_0%,transparent_100%)] opacity-10 transition group-hover:opacity-20" />
+                  <svg
+                    className="h-7 w-7 text-accent transition-transform duration-300 group-hover:scale-110"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 21s7-7.1 7-13a7 7 0 0 0-14 0c0 5.9 7 13 7 13Z" />
+                    <circle cx="12" cy="8" r="2.5" />
+                  </svg>
+                  <span className="mt-1 text-[9px] font-bold uppercase tracking-widest text-muted/60 transition group-hover:text-accent">
+                    Locate Us
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -212,7 +228,7 @@ export default function Footer() {
           </div>
         </section>
 
-        <section className="rounded-md border border-line bg-elevated/70 px-8 py-8 shadow-[0_16px_34px_rgba(68,44,20,0.12)] transition-colors duration-300 dark:bg-surface/40 dark:shadow-panel">
+        <section className="rounded-md border border-line bg-elevated/70 px-8 py-8 shadow-[0_16px_34px_rgba(68,44,20,0.12)] transition-colors duration-300 dark:bg-surface/40 dark:shadow-panel space-y-5">
           <h2 className="font-heading text-sm font-bold uppercase tracking-[0.28em] text-accent">
             In Memory Of Our Founder
           </h2>
@@ -230,6 +246,7 @@ export default function Footer() {
                 Vision, integrity, and hard work build more than businesses-they build a legacy
                 that inspires generations.
               </blockquote>
+              <p className="text-right font-heading text-6xl font-bold leading-none text-accent -mt-5">&rdquo;</p>
               <div className="mt-6 h-px w-10 bg-accent" />
               <p className="mt-6 font-heading text-lg font-bold text-accent">
                 Ramakanta Nayak

@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import OdishaSasanLogo from '../../../assets/Odisha-sasan-logo.png'
 import CopperIngotsImage from '../../../assets/copper_ingots.png'
 import CopperScrapImage from '../../../assets/Copper_Scrap.png'
+import ospcImage from '../../../assets/ospc_logo.jpg'
+import dfbImage from '../../../assets/dfb_logo.jpg'
 import ERPImage from '../../../assets/erp.png'
 import { useTheme } from '../../../hooks/useTheme.js'
 
@@ -49,8 +52,55 @@ function SustainabilityClipart() {
   )
 }
 
+function RecyclerContent({ title, desc, image, className = '', textColor = 'text-text', mutedColor = 'text-muted' }) {
+  return (
+    <div className={`flex h-full items-center gap-3 md:gap-4 ${className}`}>
+      <div className="flex h-16 w-16 md:h-18 md:w-18 shrink-0 items-center justify-center overflow-hidden rounded-md border border-line bg-white p-1.5 md:p-2">
+        <img src={image} alt={title} className="h-full w-full object-contain" />
+      </div>
+      <div>
+        <h3 className={`text-lg md:text-[1.5rem] uppercase leading-tight md:leading-[0.92] ${textColor}`}>{title}</h3>
+        <p className={`mt-1 md:mt-2 text-xs md:text-[0.98rem] leading-snug md:leading-[1.35] ${mutedColor}`}>
+          {desc}
+        </p>
+      </div>
+    </div>
+  )
+}
+
+
 export default function Mission() {
   const { isDark } = useTheme()
+  const [widths, setWidths] = useState({ 0: 'full', 1: 'w-14', 2: 'w-10' })
+
+  const layerContent = {
+    0: {
+      title: 'Govt. Authorized Recycler',
+      desc: 'Prioritizing environment and safety through certified practices.',
+      image: OdishaSasanLogo
+    },
+    1: {
+      title: 'Certified Pollution Management Facility',
+      desc: 'Extracting high-purity copper from scrap, reducing environmental footprint.',
+      image: ospcImage
+    },
+    2: {
+      title: 'Directorate of Factories & Boilers Approved',
+      desc: 'Ensuring safety, compliance, and industrial excellence.',
+      image: dfbImage
+    }
+  }
+
+  const handleLayerClick = (id) => {
+    if (widths[id] === 'full') return
+    const currentFullId = Object.keys(widths).find((k) => widths[k] === 'full')
+    setWidths((prev) => ({
+      ...prev,
+      [id]: 'full',
+      [currentFullId]: prev[id],
+    }))
+  }
+
   const recyclerCardBackground = isDark ? '#18161b' : '#fff8ee'
   const sustainabilityCardBackground = isDark ? '#9ab38f' : '#eaffe1'
   const recyclerStripBackground = isDark ? '#5c6e57' : '#91a98b'
@@ -66,7 +116,7 @@ export default function Mission() {
             background: isDark
               ? '#000'
               : '#fff8ee',
-              opacity: isDark
+            opacity: isDark
               ? 0.85
               : 0.9,
           }} />
@@ -90,61 +140,72 @@ export default function Mission() {
 
         {/* Government authorization highlight */}
         <article
-          className="relative overflow-hidden rounded-md border border-line p-5 md:col-span-3"
-          style={{ backgroundColor: recyclerCardBackground }}
+          className="relative overflow-hidden rounded-md border border-line md:col-span-3 h-[168px] md:h-[120px] bg-elevated"
         >
-          <div className="flex h-full items-center gap-4 pr-14">
-            <div className="flex h-18 w-18 shrink-0 items-center justify-center overflow-hidden rounded-full border border-line bg-white p-2">
-              <img src={OdishaSasanLogo} alt="Odisha government seal" className="h-14 w-14 object-contain" />
-            </div>
-            <div>
-              <h3 className="text-[1.5rem] uppercase leading-[0.92] text-text">Govt. Authorized Recycler</h3>
-              <p className="mt-2 max-w-[24rem] text-[0.98rem] leading-[1.35] text-muted">
-                ISO certified, prioritizing environment and safety.
-              </p>
-            </div>
-          </div>
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-14 rounded-r-md" style={{
-              backgroundColor: sustainabilityCardBackground,
-            }} />
-          <div className="pointer-events-none absolute right-8 top-0 h-full w-10 rounded-r-xl" style={{ backgroundColor: recyclerStripBackground }} />
-          <div
-            className="pointer-events-none absolute right-12 top-0 h-full w-10 rounded-r-xl"
-            style={{
-              backgroundColor: recyclerCardBackground,
-            }}
-          />
+          {[0, 1, 2].map((id) => {
+            const width = widths[id]
+            const isFull = width === 'full'
+            const bgColor = id === 0 ? recyclerCardBackground : id === 1 ? sustainabilityCardBackground : recyclerStripBackground
+            const textColor = id === 0 ? 'text-text' : id === 1 ? 'text-[#2d3a2b]' : 'text-[#f5eee3]'
+            const mutedColor = id === 0 ? 'text-muted' : id === 1 ? 'text-[#445441]' : 'text-[#f5eee3]/80'
+            const zIndex = isFull ? 30 : width === 'w-14' ? 40 : 50
+            const cornerClass = 'rounded-md'
+
+            return (
+              <div
+                key={id}
+                onClick={isFull ? undefined : () => handleLayerClick(id)}
+                className={`absolute right-0 top-0 h-full transition-all duration-700 ease-in-out ${isFull ? 'cursor-default' : 'cursor-pointer'} group ${cornerClass}`}
+                style={{
+                  width: isFull ? '100%' : width === 'w-14' ? '3rem' : '1.5rem',
+                  backgroundColor: bgColor,
+                  zIndex: zIndex,
+                }}
+              >
+                {/* Content - only fully visible when layer is 'full' */}
+                <div className={`h-full w-full pl-4 pr-14 md:px-5 py-3 md:py-4 transition-opacity duration-500 ${isFull ? 'opacity-100' : 'opacity-0'}`}>
+                  <RecyclerContent
+                    title={layerContent[id].title}
+                    desc={layerContent[id].desc}
+                    image={layerContent[id].image}
+                    textColor={textColor}
+                    mutedColor={mutedColor}
+                  />
+                </div>
+              </div>
+            )
+          })}
         </article>
 
         {/* Sustainability callout with clipart */}
         <article
-          className="relative overflow-hidden rounded-md border p-5 md:col-span-3"
+          className="relative overflow-hidden rounded-md border p-5 md:col-span-3 min-h-[120px]"
           style={{
             backgroundColor: sustainabilityCardBackground,
             borderColor: '#ccb79a',
           }}
         >
-          <div className="relative z-10 flex h-full flex-col justify-center pr-[12.5rem]">
-            <h3 className="text-[1.5rem] uppercase leading-[0.92] text-[#122415]">Sustainability in Action</h3>
-            <p className="mt-2 text-[0.98rem] leading-[1.35] text-[#203225]">
+          <div className="relative z-10 flex h-full flex-col justify-center pr-16 md:pr-[12.5rem]">
+            <h3 className="text-lg md:text-[1.5rem] uppercase leading-tight md:leading-[0.92] text-[#122415]">Sustainability in Action</h3>
+            <p className="mt-1 md:mt-2 text-xs md:text-[0.98rem] leading-snug md:leading-[1.35] text-[#203225]">
               Prioritizing scrap, lowering environmental impact.
             </p>
           </div>
-          <div className="pointer-events-none absolute inset-y-0 right-3 flex h-full max-h-full w-[13rem] items-end opacity-90">
+          <div className="pointer-events-none absolute inset-y-0 right-2 md:right-3 flex h-full max-h-full w-[8rem] md:w-[13rem] items-end opacity-90 transition-all">
             <SustainabilityClipart />
           </div>
         </article>
 
         {/* Copper ingots feature card */}
-        <article className="overflow-hidden rounded-md border border-line md:col-span-2" style={{ backgroundColor: recyclerCardBackground }}>
-          <div className="border-b border-line px-5 py-4">
-            <h3 className="text-[1.5rem] uppercase leading-[0.95] text-text">High-Grade Copper Ingots</h3>
+        <article className="group overflow-hidden rounded-md border border-line md:col-span-2" style={{ backgroundColor: recyclerCardBackground }}>
+          <div className="border-b border-line px-4 md:px-5 py-3 md:py-4">
+            <h3 className="text-lg md:text-[1.5rem] uppercase leading-tight md:leading-[0.95] text-text">High-Grade Copper Ingots</h3>
           </div>
-          <div className="relative">
+          <div className="relative overflow-hidden">
             <img
               src={CopperIngotsImage}
               alt="Stacked circular copper ingots"
-              className="h-[210px] w-full object-cover object-center"
+              className="h-[180px] md:h-[210px] w-full object-cover object-center transform scale-100 transition-transform duration-700 ease-out group-hover:scale-105"
               style={{
                 filter: isDark ? 'brightness(0.9) contrast(1.08)' : 'brightness(0.98) contrast(1.05)',
               }}
@@ -158,15 +219,15 @@ export default function Mission() {
               }}
             />
             <div className="absolute inset-0 z-10 flex items-center justify-end px-3 py-3">
-              <div className="w-[30%] min-w-[140px]">
-                <ul className="space-y-1.5 text-left text-[0.95rem]" style={{ color: ingotListTextColor }}>
-                  <li className="relative pl-4 before:absolute before:left-0 before:top-[0.12rem] before:text-[0.72rem] before:content-['➤'] before:text-[#c7814d]">
+              <div className="w-[35%] md:w-[30%] min-w-[120px] md:min-w-[140px]">
+                <ul className="space-y-1 md:space-y-1.5 text-left text-xs md:text-[0.95rem]" style={{ color: ingotListTextColor }}>
+                  <li className="relative pl-3 md:pl-4 before:absolute before:left-0 before:top-[0.12rem] before:text-[0.6rem] md:before:text-[0.72rem] before:content-['➤'] before:text-[#c7814d]">
                     99.93% Purity
                   </li>
-                  <li className="relative pl-4 before:absolute before:left-0 before:top-[0.12rem] before:text-[0.72rem] before:content-['➤'] before:text-[#c7814d]">
-                    Custom Grades
+                  <li className="relative pl-3 md:pl-4 before:absolute before:left-0 before:top-[0.12rem] before:text-[0.6rem] md:before:text-[0.72rem] before:content-['➤'] before:text-[#c7814d]">
+                    Tailored Ingots
                   </li>
-                  <li className="relative pl-4 before:absolute before:left-0 before:top-[0.12rem] before:text-[0.72rem] before:content-['➤'] before:text-[#c7814d]">
+                  <li className="relative pl-3 md:pl-4 before:absolute before:left-0 before:top-[0.12rem] before:text-[0.6rem] md:before:text-[0.72rem] before:content-['➤'] before:text-[#c7814d]">
                     Metallurgical Stability
                   </li>
                 </ul>
@@ -176,30 +237,34 @@ export default function Mission() {
         </article>
 
         {/* ERP integration workflow card */}
-        <article className="overflow-hidden rounded-md border border-line md:col-span-2" style={{ backgroundColor: recyclerCardBackground }}>
-          <div className="border-b border-line px-5 py-4">
-            <h3 className="text-[1.5rem] uppercase leading-[0.95] text-text">ERP Integration</h3>
+        <article className="group overflow-hidden rounded-md border border-line md:col-span-2" style={{ backgroundColor: recyclerCardBackground }}>
+          <div className="border-b border-line px-4 md:px-5 py-3 md:py-4">
+            <h3 className="text-lg md:text-[1.5rem] uppercase leading-tight md:leading-[0.95] text-text">ERP Integration</h3>
           </div>
-          <img
+          <div className="relative overflow-hidden">
+            <img
               src={ERPImage}
               alt="ERP integration visual"
-              className="h-[210px] w-full"
+              className="h-[180px] md:h-[210px] w-full transform scale-100 transition-transform duration-700 ease-out group-hover:scale-105"
               style={{
                 filter: isDark ? 'brightness(0.9) contrast(1.08)' : 'brightness(0.98) contrast(1.05)',
               }}
             />
+          </div>
         </article>
 
         {/* Team spotlight image card */}
-        <article className="overflow-hidden rounded-md md:col-span-2 border border-line" style={{ backgroundColor: recyclerCardBackground }}>
-          <div className="px-5 py-4">
-            <h3 className="text-[1.5rem] uppercase leading-[0.95] text-text">Meet Our Team</h3>
+        <article className="group overflow-hidden rounded-md md:col-span-2 border border-line" style={{ backgroundColor: recyclerCardBackground }}>
+          <div className="px-4 md:px-5 py-3 md:py-4">
+            <h3 className="text-lg md:text-[1.5rem] uppercase leading-tight md:leading-[0.95] text-text">Meet Our Team</h3>
           </div>
-          <img
-            className="h-[210px] w-full object-cover"
-            src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
-            alt="Team members discussing operations"
-          />
+          <div className="relative overflow-hidden">
+            <img
+              className="h-[180px] md:h-[210px] w-full object-cover transform scale-100 transition-transform duration-700 ease-out group-hover:scale-105"
+              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
+              alt="Team members discussing operations"
+            />
+          </div>
         </article>
       </div>
     </section>
