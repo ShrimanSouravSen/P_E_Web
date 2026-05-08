@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../../../hooks/useTheme.js'
 import worldMap from '../../../assets/world_map.svg'
 
@@ -29,63 +29,27 @@ const routeDefinitions = [
   { id: 'australia', path: australiaRoutePath, dashPath: australiaRoutePathReverse, color: '#00ff18', dashFrom: 0, dashTo: -44 },
 ]
 
-const portPreviews = {
-  uk: {
-    title: 'Rotterdam Port',
-    description: 'Primary European copper entry hub with customs-ready logistics.',
-    images: [
-      'https://images.unsplash.com/photo-1507120410856-1f35574c3b45?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80',
-    ],
-  },
-  china: {
-    title: 'Shanghai Port',
-    description: 'Asia Pacific export gateway with high-volume manufacturing throughput.',
-    images: [
-      'https://images.unsplash.com/photo-1517292987719-0369a794ec0f?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1483721310020-03333e577078?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1518544888074-6cfd8698ee6b?auto=format&fit=crop&w=800&q=80',
-    ],
-  },
-  'south-america': {
-    title: 'Santos Port',
-    description: 'South America logistics node for raw copper and material exports.',
-    images: [
-      'https://images.unsplash.com/photo-1509223197845-458d87318791?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1519392445616-9099407b4b26?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=800&q=80',
-    ],
-  },
-  africa: {
-    title: 'Durban Port',
-    description: 'Strategic African partner for coastal distribution and inland transit.',
-    images: [
-      'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1468581264421-a80f4c6dc395?auto=format&fit=crop&w=800&q=80',
-    ],
-  },
-  australia: {
-    title: 'Sydney Port',
-    description: 'Outbound supply channel for Asia-Pacific infrastructure and energy markets.',
-    images: [
-      'https://images.unsplash.com/photo-1488449077988-6cbb5edb1aa1?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1523800503107-5bc3ba2f2e83?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1501390352907-5b1a7bf02f73?auto=format&fit=crop&w=800&q=80',
-    ],
-  },
-}
-
 export default function GlobalSupply() {
   const { isDark } = useTheme()
   const [activePort, setActivePort] = useState(null)
   const [isTouchDevice, setIsTouchDevice] = useState(false)
+  const mapRootRef = useRef(null)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
     setIsTouchDevice(window.matchMedia('(hover: none)').matches || navigator.maxTouchPoints > 0)
   }, [])
+
+  useEffect(() => {
+    const handlePointerDown = (event) => {
+      if (!isTouchDevice) return
+      if (mapRootRef.current?.contains(event.target)) return
+      setActivePort(null)
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
+  }, [isTouchDevice])
 
   const handlePortEnter = (portId) => {
     if (isTouchDevice) return
@@ -104,12 +68,26 @@ export default function GlobalSupply() {
 
   return (
     <section className="px-6 py-14 md:px-10 md:py-16">
+      <style>
+        {`
+          #IN, #LK {
+            fill: #f5c17d !important;
+            fill-opacity: 0.8;
+            transition: all 0.3s ease;
+            
+          }
+          #IN:hover, #LK:hover {
+            fill-opacity: 1;
+            filter: drop-shadow(0 0 8px rgba(245, 193, 125, 0.4));
+          }
+        `}
+      </style>
       <div className="text-center">
         <h3 className="text-3xl md:text-4xl">Local Integrity, Global Supply</h3>
         <p className="mx-auto mt-2 max-w-xl text-muted">Logistics aligned to global partners with fully traceable dispatch documents.</p>
       </div>
       <div className="mt-8 p-4 md:p-6">
-        <div className="relative overflow-hidden">
+        <div ref={mapRootRef} className="relative overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_52%_42%,rgba(219,138,58,0.16),transparent_34%)]" />
           <svg
             viewBox="0 0 1000 450"
@@ -156,8 +134,21 @@ export default function GlobalSupply() {
               height="450"
               preserveAspectRatio="xMidYMid meet"
               opacity={isDark ? 0.42 : 0.62}
+              className="world-map-image"
               style={{ filter: isDark ? 'brightness(1)' : 'brightness(0)' }}
             />
+
+            {/* Injected paths for India and Sri Lanka to allow CSS targeting and custom styling */}
+            <g transform="translate(0, 10.75) scale(0.5)">
+              <path
+                id="IN"
+                d="M1427.6 308l-2.8 3-0.9 6 5.8 2.4 5.8 3.1 7.8 3.6 7.7 0.9 3.8 3.2 4.3 0.6 6.9 1.5 4.6-0.1 0.1-2.5-1.5-4.1-0.2-2.7 3.1-1.4 1.5 5.1 0.4 1.2 5.5 2.5 3.2-1 4.7 0.4 4.5-0.2-0.5-3.9-2.6-2.1 4.2-0.8 3.9-4.8 5.4-4 4.9 1.5 3.2-2.7 3.6 4-1.2 2.7 6.1 1 1 2.4-1.7 1.2 1.4 3.9-4.2-1.1-6.2 4.4 0.9 3.7-2 5.4 0.3 3.1-1.6 5.3-4.6-1.5 0.9 6.7-1 2.2 1 2.7-2.5 1.5-4.4-10.2-1.5 0-0.3 4.2-3.6-3.4 1.2-3.6 2.4-0.4 1.6-5.4-3.4-1.1-5.1 0.1-5.4-0.9-1.2-4.5-2.7-0.3-4.9-2.8-1.2 4.4 4.6 3.4-3 2.4-0.9 2.3 3.7 1.7-0.3 3.9 2.6 4.8 1.6 5.3-0.5 2.4-3.8-0.1-6.6 1.3 0.9 4.8-2.4 3.8-7.5 4.4-5.3 7.5-3.8 4.1-5 4.2 0.3 2.9-2.6 1.6-4.8 2.3-2.6 0.3-1.2 4.9 1.9 8.4 0.7 5.3-1.9 6.1 0.7 10.9-2.9 0.3-2.3 4.9 1.9 2.2-5.1 1.8-1.7 4.3-2.2 1.9-5.6-6-3.1-9-2.5-6.5-2.2-3-3.4-6.2-2-8-1.4-4-5.9-8.8-3.5-12.5-2.6-8.2-0.8-7.8-1.7-6-7.7 3.9-4-0.8-8.1-7.8 2.4-2.3-1.9-2.5-7.1-5.5 3.2-4.3 12.1 0-1.8-5.5-3.5-3.2-1.4-5-4-2.8 4.9-6.8 6.5 0.5 4.5-6.7 2.2-6.5 3.9-6.5-1-4.6 3.8-3.7-5.1-3.1-2.9-4.4-3.3-5.6 2-2.8 8.5 1.6 5.7-1 3.8-5.4 7.7 7.6 0.8 5.2 3 3.3 0.6 3.3-4.1-0.9 3.2 7.1 6.2 4 8.6 4.5z"
+              />
+              <path
+                id="LK"
+                d="M1445.9 462l-4.8 1.5-2.9-5.1-1.4-9.2 2-10.4 4.1 3.5 2.8 4.5 3.1 6.7-0.6 6.7-2.3 1.8z"
+              />
+            </g>
 
             <g filter="url(#routeGlow)">
               {routeDefinitions.map((route) => (
