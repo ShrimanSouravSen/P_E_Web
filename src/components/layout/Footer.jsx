@@ -7,7 +7,7 @@ const quickLinks = [
   ['Process', '#process'],
   ['Sustainability', '#sustainability'],
   ['Applications', '#applications'],
-  // ['Quality & Certification', '#quality'],
+  ['Staff Login', 'https://parbatienterprises.com/expense_tracker/login'],
   // ['Careers', '#careers'],
   // ['Contact Us', '#contact'],
 ]
