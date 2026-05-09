@@ -80,12 +80,12 @@ export default function Mission() {
       image: OdishaSasanLogo
     },
     1: {
-      title: 'Certified Pollution Management Facility',
-      desc: 'Extracting high-purity copper from scrap, reducing environmental footprint.',
+      title: 'State Pollution Control Board, Odisha',
+      desc: '[Department Of Forest Environment & Climate Change, Government 0f Odisha]',
       image: ospcImage
     },
     2: {
-      title: 'Directorate of Factories & Boilers Approved',
+      title: 'Directorate of Factories & Boilers, Odisha',
       desc: 'Ensuring safety, compliance, and industrial excellence.',
       image: dfbImage
     }
@@ -172,6 +172,25 @@ export default function Mission() {
                     mutedColor={mutedColor}
                   />
                 </div>
+
+                {/* Indication arrow for collapsed strips */}
+                {!isFull && (
+                  <div className={`absolute inset-y-0 left-0 w-full flex items-center justify-center pointer-events-none ${width === 'w-14' ? 'pr-[1.5rem]' : ''}`}>
+                    <svg
+                      className={`${textColor} opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110`}
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                  </div>
+                )}
               </div>
             )
           })}
