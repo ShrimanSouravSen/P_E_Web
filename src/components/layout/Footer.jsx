@@ -7,7 +7,7 @@ const quickLinks = [
   ['Process', '#process'],
   ['Sustainability', '#sustainability'],
   ['Applications', '#applications'],
-  // ['Quality & Certification', '#quality'],
+  ['Portal', 'https://parbatienterprises.com/expense_tracker/login'],
   // ['Careers', '#careers'],
   // ['Contact Us', '#contact'],
 ]
@@ -186,7 +186,7 @@ export default function Footer() {
               <div className="flex items-center justify-between gap-4">
                 <address className="not-italic">
                   <p className="max-w-[15rem] font-body text-base uppercase leading-7 tracking-wide text-muted">
-                    Registered Office<br/> Balasore Odisha 756001
+                    Registered Office<br /> Balasore Odisha 756001
                   </p>
                 </address>
 
@@ -293,7 +293,7 @@ export default function Footer() {
               <p className="mt-6 font-heading text-lg font-bold text-accent">
                 Ramakanta Nayak
               </p>
-              <p className="mt-1 text-base text-muted">Originator</p>
+              <p className="mt-1 text-base text-muted">Visionary</p>
             </div>
           </div>
         </section>
