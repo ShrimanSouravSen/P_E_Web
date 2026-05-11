@@ -1,10 +1,10 @@
 export const DEFAULT_LABELS = [
-  { text: 'Electrical & Power', top: '32%', left: '6%', side: 'left' },
-  { text: 'EV Components', top: '30%', left: '94%', side: 'right' },
+  { text: 'Electrical & Power', top: '25%', left: '6%', side: 'left' },
+  { text: 'EV Components', top: '25%', left: '94%', side: 'right' },
   { text: 'Automotive', top: '50%', left: '6%', side: 'left' },
   { text: 'Household', top: '50%', left: '94%', side: 'right' },
-  { text: 'Renewable Energy', top: '71%', left: '6%', side: 'left' },
-  { text: 'Infrastructure', top: '71%', left: '94%', side: 'right' },
+  { text: 'Renewable Energy', top: '75%', left: '6%', side: 'left' },
+  { text: 'Infrastructure', top: '75%', left: '94%', side: 'right' },
 ];
 
 export const LABEL_PREVIEW_IMAGES = {
