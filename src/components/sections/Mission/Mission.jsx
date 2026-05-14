@@ -6,6 +6,7 @@ import ospcImage from '../../../assets/ospc_logo.jpg'
 import dfbImage from '../../../assets/dfb_logo.jpg'
 import ERPImage from '../../../assets/erp.png'
 import { useTheme } from '../../../hooks/useTheme.js'
+import ImpactGoalsGrid from './ImpactGoalsGrid.jsx'
 
 
 function SustainabilityClipart() {
@@ -237,16 +238,16 @@ export default function Mission() {
                   : 'linear-gradient(90deg, rgb(255 255 255 / 2%) 0%, rgb(255 251 246 / 48%) 40%, rgb(255 252 247) 100%)',
               }}
             />
-            <div className="absolute inset-0 z-10 flex items-center justify-end px-3 py-3">
-              <div className="w-[35%] md:w-[30%] min-w-[120px] md:min-w-[140px]">
-                <ul className="space-y-1 md:space-y-1.5 text-left text-xs md:text-[0.95rem]" style={{ color: ingotListTextColor }}>
-                  <li className="relative pl-3 md:pl-4 before:absolute before:left-0 before:top-[0.12rem] before:text-[0.6rem] md:before:text-[0.72rem] before:content-['➤'] before:text-[#c7814d]">
+            <div className="absolute inset-0 z-10 flex items-center justify-end py-3 pl-3 pr-[15px]">
+              <div className="w-[42%] min-w-[140px] md:w-[36%] md:min-w-[160px]">
+                <ul className="space-y-1 text-left text-[0.68rem] md:space-y-1.5 md:text-[0.9rem]" style={{ color: ingotListTextColor }}>
+                  <li className="relative whitespace-nowrap pl-3 before:absolute before:left-0 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-[#c7814d] before:content-[''] md:pl-4 md:before:h-2 md:before:w-2">
                     99.93% Purity
                   </li>
-                  <li className="relative pl-3 md:pl-4 before:absolute before:left-0 before:top-[0.12rem] before:text-[0.6rem] md:before:text-[0.72rem] before:content-['➤'] before:text-[#c7814d]">
+                  <li className="relative whitespace-nowrap pl-3 before:absolute before:left-0 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-[#c7814d] before:content-[''] md:pl-4 md:before:h-2 md:before:w-2">
                     Tailored Ingots
                   </li>
-                  <li className="relative pl-3 md:pl-4 before:absolute before:left-0 before:top-[0.12rem] before:text-[0.6rem] md:before:text-[0.72rem] before:content-['➤'] before:text-[#c7814d]">
+                  <li className="relative whitespace-nowrap pl-3 before:absolute before:left-0 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-[#c7814d] before:content-[''] md:pl-4 md:before:h-2 md:before:w-2">
                     Metallurgical Stability
                   </li>
                 </ul>
@@ -272,17 +273,12 @@ export default function Mission() {
           </div>
         </article>
 
-        {/* Team spotlight image card */}
-        <article className="group overflow-hidden rounded-md md:col-span-2 border border-line" style={{ backgroundColor: recyclerCardBackground }}>
-          <div className="px-4 md:px-5 py-3 md:py-4">
-            <h3 className="text-lg md:text-[1.5rem] uppercase leading-tight md:leading-[0.95] text-text">Meet Our Team</h3>
+        <article className="group overflow-hidden rounded-md border border-line md:col-span-2" style={{ backgroundColor: recyclerCardBackground }}>
+          <div className="border-b border-line px-4 md:px-5 py-3 md:py-4">
+            <h3 className="text-lg md:text-[1.5rem] uppercase leading-tight md:leading-[0.95] text-text">Socio Economic Development</h3>
           </div>
           <div className="relative overflow-hidden">
-            <img
-              className="h-[180px] md:h-[210px] w-full object-cover transform scale-100 transition-transform duration-700 ease-out group-hover:scale-105"
-              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
-              alt="Team members discussing operations"
-            />
+            <ImpactGoalsGrid />
           </div>
         </article>
       </div>
