@@ -3,7 +3,7 @@ import logo from '../../assets/logo.png'
 import { useTheme } from '../../hooks/useTheme'
 import ThemeToggle from '../ui/ThemeToggle'
 
-const navItems = ['Home', 'About', 'Process', 'Sustainability', 'Applications']
+const navItems = ['Home', 'About Us', 'Process', 'Sustainability', 'Applications']
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
