@@ -1,4 +1,4 @@
-import founderImage from '../../assets/founder.png'
+import founderImage from '../../assets/founder.jpeg'
 import { useTheme } from '../../hooks/useTheme'
 
 const quickLinks = [
